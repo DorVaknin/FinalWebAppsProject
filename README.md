@@ -1,2 +1,0 @@
-# FinalWebAppsProject
-Animals accessories shop

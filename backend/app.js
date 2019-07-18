@@ -6,6 +6,8 @@ var mongoose = require('mongoose');
 var Buyer = require('./models/buyerModel');
 var Item = require('./models/itemModel');
 var app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect(config.getDbConnectionString(),{ useNewUrlParser: true })
     .then(()=> {
@@ -31,18 +33,19 @@ app.get("/", (req,res)=>{
 // register screen
 app.post("/register", (req,res)=>{
   // update data base
-  console.log("Heta!");
+  // console.log(req.query)
   let buyer = new Buyer({
     ID: req.body.ID,
     Password: req.body.password,
-    Name: req.body.Name,
+    Name: req.query.Name,
     LastName: req.body.LastName,
     TypeOfPet: req.body.TypeOfPet,
-    Cart: []
-  });
-  buyer.save();
-  console.log(buyer);
-  res.status(200).json({message: 'Post added successfully'});
+    Cart: req.body.Cart
+  })
+  buyer.save().catch(() => {
+    console.log('could not create a buyer object as expected')
+});
+  res.status(200).json({message: 'buyer added successfully to DB'});
 });
 
 

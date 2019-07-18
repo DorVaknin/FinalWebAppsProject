@@ -1,13 +1,18 @@
 var express = require('express');
 var config = require('./config');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser')
 var mongoose = require('mongoose');
 
 var Buyer = require('./models/buyerModel');
 var Item = require('./models/itemModel');
 var app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+
+app.use(bodyParser.json());
 
 mongoose.connect(config.getDbConnectionString(),{ useNewUrlParser: true })
     .then(()=> {
@@ -33,11 +38,11 @@ app.get("/", (req,res)=>{
 // register screen
 app.post("/register", (req,res)=>{
   // update data base
-  // console.log(req.query)
+    
   let buyer = new Buyer({
     ID: req.body.ID,
-    Password: req.body.password,
-    Name: req.query.Name,
+    Password: req.body.Password,
+    Name: req.body.Name,
     LastName: req.body.LastName,
     TypeOfPet: req.body.TypeOfPet,
     Cart: req.body.Cart

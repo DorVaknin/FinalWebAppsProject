@@ -42,8 +42,8 @@ app.post("/register", (req,res)=>{
     TypeOfPet: req.body.TypeOfPet,
     Cart: req.body.Cart
   })
-  buyer.save().catch(() => {
-    console.log('could not create a buyer object as expected')
+  buyer.save().catch((e) => {
+    console.log(e)
 });
   res.status(200).json({message: 'buyer added successfully to DB'});
 });

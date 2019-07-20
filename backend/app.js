@@ -40,6 +40,16 @@ Buyer.find()
   });
 });
 
+//delete users in admin screen // CHECKED and working.
+app.delete("/admin/:id", (req,res) => {
+  Buyer.deleteOne({_id: req.params.id})
+  .then(() => {
+    res.status(200).send("The user deleted successfully");
+  }).catch(() => {
+    res.status(404).send('Request Failed');
+  });
+});
+
 //////////////////////////////////////
 // register screen //CHECKED and working
 app.post("/register", (req,res)=> {

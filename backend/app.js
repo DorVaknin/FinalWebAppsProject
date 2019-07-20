@@ -72,17 +72,18 @@ app.post("/register", (req,res)=> {
     res.status(404).send('Request Failed');
   });
 });
+
 const getUserByIDAndPassword = (ID, encryptedPassword) => {
 return new Promise((resolve, reject) =>{
-  console.log(ID, encryptedPassword);
   Buyer.findOne({ID: ID, Password: encryptedPassword})
   .then((user) => {
-    console.log(user);
+    if(user == null){
+      reject("Something is wrong with the credentials")
+    }
     resolve(user);
   }).catch(()=>{
     reject("Something is wrong with the credentials");
   });
-
 });
 }
 const verifyLogin = (ID, password) => {
@@ -99,14 +100,13 @@ const verifyLogin = (ID, password) => {
 // login screen
 app.post('/login/', (req,res) => {
   const {ID, Password} = req.body;//destructor
-  var authToken = verifyLogin(ID,Password);
-  if(authToken != null){
+  verifyLogin(ID,Password).then((authToken)=>{//authToken is user._id
     const expiryDate = 1000 * 60 * 5 // 5 Min
-      res.cookie('authToken', authToken, { maxAge: expiryDate });
-      res.status(200).send("User logged in succesfully");//sends cookie automatically
-  }else{
-      res.status(401).send("The user is unauthorized");
-  }
+    res.cookie('authToken', authToken, { maxAge: expiryDate });
+    res.status(200).send("User logged in succesfully");//sends cookie automatically
+  }).catch(()=>{
+    res.status(401).send("The user is unauthorized");
+  });
 })
 
 

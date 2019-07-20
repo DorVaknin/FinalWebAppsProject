@@ -14,31 +14,36 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+//CHECKED and working.
 mongoose.connect(config.getDbConnectionString(),{ useNewUrlParser: true })
     .then(()=> {
         console.log('Connected to database!');
-    })
-    .catch(() => {
+    }).catch(() => {
         console.log('Connection failed');
     });
 
 ////////////////////////////////
-///TEST
+///TEST //CHECKED and working
 app.get("/", (req,res)=>{
   res.send("Hey friends");
 });
 
-// //////////////////////////////////////
-// // admin screen
-// app.get("/admin", (req,res)=>{
-//   // return all users in data base
-// });
+////////////////////////////////////////
+// admin screen // CHECKED and working.
+app.get("/admin", (req,res)=>{
+//return all users in data base
+Buyer.find()
+  .then(documents => { 
+    res.status(200).send(JSON.stringify(documents));
+  }).catch(()=>{
+    res.status(404).send('Request Failed');
+  });
+});
 
 //////////////////////////////////////
-// register screen
-app.post("/register", (req,res)=>{
+// register screen //CHECKED and working
+app.post("/register", (req,res)=> {
   // update data base
-    
   let buyer = new Buyer({
     ID: req.body.ID,
     Password: req.body.Password,
@@ -47,12 +52,14 @@ app.post("/register", (req,res)=>{
     TypeOfPet: req.body.TypeOfPet,
     Cart: req.body.Cart
   })
-  buyer.save().catch((e) => {
-    console.log(e)
+  buyer.save()
+  .then(() => {
+    res.status(200).send("The buyer added successfully to DB");
+  })
+  .catch(() => {
+    res.status(404).send('Request Failed');
+  });
 });
-  res.status(200).json({message: 'buyer added successfully to DB'});
-});
-
 
 // //////////////////////////////////////
 // // login screen
@@ -88,7 +95,7 @@ app.post("/register", (req,res)=>{
 //   // send 200 status to user if everything went well
 // })
 //
-// app.delete('/cart/user_id/:item_id'){
+// app.delete('/cart/:user_id/:item_id'){
 //   // send 200 status to user if everything went well
 // }
 //

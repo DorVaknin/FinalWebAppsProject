@@ -1,15 +1,17 @@
 var express = require('express');
 var config = require('./config');
+var app = express();
 const bodyParser = require('body-parser')
 var mongoose = require('mongoose');
 
 var Buyer = require('./models/buyerModel');
 var Item = require('./models/itemModel');
-var app = express();
+var encryptor = require('./encryptor');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({
-	extended: true
+  extended: true
 }));
 
 app.use(bodyParser.json());
@@ -56,7 +58,7 @@ app.post("/register", (req,res)=> {
   // update data base
   let buyer = new Buyer({
     ID: req.body.ID,
-    Password: req.body.Password,
+    Password: encryptor(req.body.Password.trim()),
     Name: req.body.Name,
     LastName: req.body.LastName,
     TypeOfPet: req.body.TypeOfPet,
@@ -70,19 +72,44 @@ app.post("/register", (req,res)=> {
     res.status(404).send('Request Failed');
   });
 });
+const getUserByIDAndPassword = (ID, encryptedPassword) => {
+return new Promise((resolve, reject) =>{
+  console.log(ID, encryptedPassword);
+  Buyer.findOne({ID: ID, Password: encryptedPassword})
+  .then((user) => {
+    console.log(user);
+    resolve(user);
+  }).catch(()=>{
+    reject("Something is wrong with the credentials");
+  });
 
-// //////////////////////////////////////
-// // login screen
-// app.get('/:user_name:password' (req,res)=>{
-//   // check in data base
-//   // return cookie
-// })
-//
-//
-// app.post('/login/...' (req,res)=>{
-//   // update data base
-// })
-//
+});
+}
+const verifyLogin = (ID, password) => {
+  return new Promise((resolve,reject)=> {
+    const encryptedPass = encryptor(password.trim());
+    getUserByIDAndPassword(ID, encryptedPass).then(user => {
+      resolve(user._id); // returns authentication token
+    }).catch(() => {
+      reject();
+    })
+  })
+}
+//////////////////////////////////////
+// login screen
+app.post('/login/', (req,res) => {
+  const {ID, Password} = req.body;//destructor
+  var authToken = verifyLogin(ID,Password);
+  if(authToken != null){
+    const expiryDate = 1000 * 60 * 5 // 5 Min
+      res.cookie('authToken', authToken, { maxAge: expiryDate });
+      res.status(200).send("User logged in succesfully");//sends cookie automatically
+  }else{
+      res.status(401).send("The user is unauthorized");
+  }
+})
+
+
 // ////////////////////////
 // //store screen (home screen)
 //

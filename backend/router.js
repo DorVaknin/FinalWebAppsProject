@@ -3,6 +3,7 @@ const loginService = require("./LoginLogic");
 const authMiddleware = require("./authMiddleware");
 const Buyer = require('./models/Buyer');
 const Item = require('./models/Item');
+const ObjectId = require('mongodb').ObjectID;
 const getUserMiddleware = require("./getUserMiddleware");
 ////////////////////////////////////// TODO - need to add before the authetication middleware the readme file
   // register screen //CHECKED and working
@@ -86,10 +87,12 @@ router.use(authMiddleware);// using the middleware that we defined
   router.get('/cart/', (req,res)=> {
     console.log(req.user);
   });
-
+///TODO NOT WORKING
   const addItemToBuyer = (userObjectID,itemObjectID) => {
       console.log(userObjectID,itemObjectID);
-      return Buyer.findByIdAndUpdate(userObjectID,{$push: {Cart: new ObjectId(itemObjectID)}});
+      console.log("_id", ObjectId(userObjectID))
+    //   return Buyer.updateOne({_id: userObjectID},{$push: {Cart: itemObjectID}});
+      return Buyer.findOneAndUpdate({_id : userObjectID},{ $push: {Cart: ObjectId(itemObjectID)}});
   }
   router.post('/cart/:item_id', (req,res) => {
     const userObjectID = req.user._id;

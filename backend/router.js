@@ -1,97 +1,67 @@
 const router = require("express").Router();
-
-const Buyer = require('./models/buyerModel');
-const Item = require('./models/itemModel');
-const encryptor = require('./encryptor');
-
+const loginService = require("./LoginLogic");
+const authMiddleware = require("./authMiddleware");
+const Buyer = require('./models/Buyer');
+const Item = require('./models/Item');
+const getUserMiddleware = require("./getUserMiddleware");
 ////////////////////////////////////// TODO - need to add before the authetication middleware the readme file
   // register screen //CHECKED and working
-  router.post("/register", (req,res)=> {
-    // update data base
-    let buyer = new Buyer({
-      ID: req.body.ID,
-      Password: encryptor(req.body.Password.trim()),
-      Name: req.body.Name,
-      LastName: req.body.LastName,
-      TypeOfPet: req.body.TypeOfPet,
-      Cart: req.body.Cart
-    })
-    buyer.save()
-    .then(() => {
-      res.status(200).send("The buyer added successfully to DB");
-    })
-    .catch(() => {
-      res.status(404).send('Request Failed');
-    });
-  });
+  router.post("/register", loginService.register);
   
-  const getUserByIDAndPassword = (ID, encryptedPassword) => {
-  return new Promise((resolve, reject) =>{
-    Buyer.findOne({ID: ID, Password: encryptedPassword})
-    .then((user) => {
-      if(user == null){
-        reject("Something is wrong with the credentials")
-      }
-      resolve(user);
-    }).catch(()=>{
-      reject("Something is wrong with the credentials");
-    });
-  });
-  }
-  const verifyLogin = (ID, password) => {
-    return new Promise((resolve,reject)=> {
-      const encryptedPass = encryptor(password.trim());
-      getUserByIDAndPassword(ID, encryptedPass).then(user => {
-        resolve(user._id); // returns authentication token
-      }).catch(() => {
-        reject();
-      })
-    })
-  }
-
-//////////////////////////////////////
   // login screen
-  router.post('/login/', (req,res) => {
-    const {ID, Password} = req.body;//destructor
-    verifyLogin(ID,Password).then((authToken)=>{//authToken is user._id
-      const expiryDate = 1000 * 60 * 5 // 5 Min
-      res.cookie('authToken', authToken, { maxAge: expiryDate });
-      res.status(200).send("User logged in succesfully");//sends cookie automatically
-    }).catch(()=>{
-      res.status(401).send("The user is unauthorized");
-    });
+  router.post('/login/', loginService.login);
+  ///TEST
+  //adding items to the DB
+  router.post("/admin", (req,res)=>{
+      console.log(req.body);
+    let item = new Item({
+        name: req.body.name,
+        desc: req.body.desc,
+        productType: req.body.productType,
+        pictureURL: req.body.pictureURL,
+        price: req.body.price,
+        animalType: req.body.animalType
+      })
+      item.save()
+      .then(() => {
+        res.status(200).send("The item added successfully to DB");
+      })
+      .catch(() => {
+        res.status(404).send('Request Failed');
+      });
   })
-  
-
-const authenticationMiddleware = (req,res,next) => {
-    const authToken = req.cookies.authToken;
-    if(authToken){
-        const expiryDate = 1000 * 60 * 5 // 5 Min
-        res.cookie('authToken', authToken, { maxAge: expiryDate });
-        next();
-    }else{
-        res.status(401).end();
-    }
-}
-router.use(authenticationMiddleware);// using the middleware that we defined
-////////////////////////////////
-///TEST //CHECKED and working
-router.get("/", (req,res)=>{
-    res.send("Hey friends");
-  });
+router.use(authMiddleware);// using the middleware that we defined
   
   ////////////////////////////////////////
   // admin screen // CHECKED and working.
   router.get("/admin", (req,res)=>{
   //return all users in data base
-  Buyer.find()
+  Buyer.findOne({ID: ID, Password: encryptedPassword})
     .then(documents => { 
       res.status(200).send(JSON.stringify(documents));
     }).catch(()=>{
       res.status(404).send('Request Failed');
     });
   });
-  
+  //adding items to the DB
+  router.post("/admin", (req,res)=>{
+    let item = new Item({
+        name: req.post.name,
+        desc: req.post.desc,
+        productType: req.post.productType,
+        pictureURL: req.post.pictureURL,
+        price: req.post.price,
+        animalType: req.post.animalType
+      })
+      item.save()
+      .then(() => {
+        res.status(200).send("The item added successfully to DB");
+      })
+      .catch(() => {
+        res.status(404).send('Request Failed');
+      });
+  })
+
   //delete users in admin screen // CHECKED and working.
   router.delete("/admin/:id", (req,res) => {
     Buyer.deleteOne({_id: req.params.id})
@@ -102,9 +72,6 @@ router.get("/", (req,res)=>{
     });
   });
   
-  
-
-  
   // ////////////////////////
   // //store screen (home screen)
   //
@@ -113,19 +80,26 @@ router.get("/", (req,res)=>{
   //   // user will have -> user.cart / user.items ...
   // })
   //
-  // //////////////////////////////////////
-  // // cart screen
-  // router.get('/cart/:user_id' (req,res)=>{
-  //   // get MONGO(user_id, cart)
-  //   // get cart items
-  //   // res.items
-  // })
-  //
-  // router.post('/cart/:user_id/:item_id' (req,res)=>{
-  //   // Put in cart -> MONGO.put(user_id,item);
-  //   // add cart item
-  //   // send 200 status to user if everything went well
-  // })
+  router.use(getUserMiddleware);
+  ////////////////////////////////////////
+  //// cart screen
+  router.get('/cart/', (req,res)=> {
+    console.log(req.user);
+  });
+
+  const addItemToBuyer = (userObjectID,itemObjectID) => {
+      console.log(userObjectID,itemObjectID);
+      return Buyer.findByIdAndUpdate(userObjectID,{$push: {Cart: new ObjectId(itemObjectID)}});
+  }
+  router.post('/cart/:item_id', (req,res) => {
+    const userObjectID = req.user._id;
+    const itemObjectID = req.params.item_id;
+    addItemToBuyer(userObjectID,itemObjectID).then(()=> {
+        res.status(200).send("Added the item successfully to the user");
+    }).catch(() => {
+        res.status(404).send("The item did not added successfully");
+    })
+  })
   //
   // router.delete('/cart/:user_id/:item_id'){
   //   // send 200 status to user if everything went well

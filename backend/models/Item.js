@@ -6,9 +6,8 @@ const itemSchema = mongoose.Schema({
     productType: String,
     pictureURL: String,
     price: Number,
-    animalType: String,
-    guid: String
+    animalType: String
 });
 
-module.exports = mongoose.model('User', itemSchema);
+module.exports = mongoose.model('Item', itemSchema);
 

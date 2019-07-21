@@ -1,16 +1,12 @@
 const Buyer = require('../models/Buyer');
 const mongoose = require('mongoose');
 const addItemToBuyer = (userObjectID,itemObjectID) => {
-    // //Checks if the item is in the Database
-    // isUserExists(userObjectID).then().catch(()=>{
-    //      return Promise.reject("User does not exists");
-    // });
-    // isItemExists(itemObjectID).then().catch(()=>{
-    //     return Promise.reject(new Error("Item does not exists"));
-    // });
     return Buyer.findOneAndUpdate({_id : mongoose.Types.ObjectId(userObjectID)},{ $push: {Cart: mongoose.Types.ObjectId(itemObjectID)}});    
 }
 
+const deleteItemFromBuyer = (userObjectID,itemObjectID) => {
+  return Buyer.findOneAndUpdate({_id : mongoose.Types.ObjectId(userObjectID)},{ $pull: {Cart: mongoose.Types.ObjectId(itemObjectID)}});    
+}
 
 // const isUserExists = (userObjectID) => {
 //     Buyer.findById(userObjectID).then((value)=>{
@@ -28,7 +24,7 @@ const addItemToBuyer = (userObjectID,itemObjectID) => {
 //         }
 //     })
 // }
-addItem = (req,res) => {
+const addItem = (req,res) => {
     const userObjectID = req.user._id;
     const itemObjectID = req.params.item_id;
     addItemToBuyer(userObjectID,itemObjectID).then(()=> {
@@ -38,7 +34,17 @@ addItem = (req,res) => {
     })
 }
 
-getUserCart = (req,res) => {
+const deleteItem = (req,res) => {
+  const userObjectID = req.user._id;
+  const itemObjectID = req.params.item_id;
+  deleteItemFromBuyer(userObjectID,itemObjectID).then(()=> {
+      res.status(200).send("Deleted the item successfully from the user's cart");
+  }).catch((err) => {
+      res.status(404).send("The item did was not deleted successfully added successfully : " + err);
+  })
+}
+
+const getUserCart = (req,res) => {
     return new Promise((resolve, reject) =>{
       Buyer.findOne({_id : req.user._id})
       .then((user) => {
@@ -56,6 +62,7 @@ getUserCart = (req,res) => {
   
 module.exports = {
     addItem : addItem,
-    getUserCart : getUserCart
+    getUserCart : getUserCart,
+    deleteItem: deleteItem
 }
   

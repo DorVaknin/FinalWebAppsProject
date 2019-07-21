@@ -1,20 +1,19 @@
 const router = require("express").Router();
 const loginLogic = require("../logics/LoginLogic");
 const adminLogic = require("../logics/AdminLogic");
+const registerLogic = require("../logics/RegisterLogic");
 const cartLogic = require("../logics/CartLogic");
 const authMiddleware = require("../middlewares/authMiddleware");
-const Buyer = require("../models/Buyer");
-const Item = require("../models/Item");
 const getUserMiddleware = require("../middlewares/getUserMiddleware");
 
 //TODO - need to add before the authetication middleware the readme file
 // register screen
-router.post("/register", loginLogic.register);
+router.post("/register", registerLogic);
 
 // login screen
-router.post("/login", loginLogic.login);
+router.post("/login", loginLogic);
 
-// middlewares
+// middlewares (only for backend usage)
 router.use(authMiddleware);
 router.use(getUserMiddleware);
 
@@ -29,4 +28,4 @@ router.get("/cart/getusercart", cartLogic.getUserCart); //Checked and working, c
 router.post("/cart/addItem/:item_id", cartLogic.addItem); //Checked and working
 router.delete("/cart/deleteItem/:item_id", cartLogic.deleteItem); //Checked and working, can be used for checkout screen too
 
-module.exports = router;
+module.exports = router ;

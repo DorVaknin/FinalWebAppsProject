@@ -1,5 +1,4 @@
 const getUser = (req, res) => {
-  // CHECKED AND WORKING.
   Buyer.findOne({ _id: req.params.objectid })
     .then(user => {
       if (user == null) {

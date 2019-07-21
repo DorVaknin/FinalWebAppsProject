@@ -1,11 +1,11 @@
 const router = require("express").Router();
-const loginService = require("./LoginLogic");
-const authMiddleware = require("./authMiddleware");
-const Buyer = require('./models/Buyer');
-const Item = require('./models/Item');
+const loginService = require("../logics/LoginLogic");
+const authMiddleware = require("../middlewares/authMiddleware");
+const Buyer = require('../models/Buyer');
+const Item = require('../models/Item');
 const mongoose = require('mongoose');
-const getUserMiddleware = require("./getUserMiddleware");
-const cartLogic = require("./CartLogic");
+const getUserMiddleware = require("../middlewares/getUserMiddleware");
+const cartLogic = require("../logics/CartLogic");
 ////////////////////////////////////// TODO - need to add before the authetication middleware the readme file
   // register screen //CHECKED and working
   router.post("/register", loginService.register);

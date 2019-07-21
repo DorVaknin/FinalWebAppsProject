@@ -3,7 +3,7 @@ const config = require('./config');
 const app = express();
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
-const router = require('./router');
+const router = require('./routes/router');
 const cookieParser = require('cookie-parser');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

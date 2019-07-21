@@ -1,4 +1,4 @@
-const Buyer = require('./models/Buyer');
+const Buyer = require('../models/Buyer');
 const mongoose = require('mongoose');
 const addItemToBuyer = (userObjectID,itemObjectID) => {
     // //Checks if the item is in the Database

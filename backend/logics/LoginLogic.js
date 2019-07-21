@@ -1,5 +1,5 @@
-const Buyer = require('./models/Buyer');;
-const encryptor = require('./encryptor');
+const Buyer = require('../models/Buyer');;
+const encryptor = require('../encryption/encryptor');
 ////////////////////////////////////// TODO - need to add before the authetication middleware the readme file
   // register screen //CHECKED and working
   const register = (req,res)=> {

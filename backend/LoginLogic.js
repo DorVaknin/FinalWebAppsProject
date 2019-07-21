@@ -16,8 +16,8 @@ const encryptor = require('./encryptor');
     .then(() => {
       res.status(200).send("The buyer added successfully to DB");
     })
-    .catch(() => {
-      res.status(404).send('Request Failed');
+    .catch((err) => {
+      res.status(404).send('Request Failed' + err);
     });
 }
   

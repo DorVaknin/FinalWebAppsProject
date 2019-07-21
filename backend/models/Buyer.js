@@ -6,6 +6,7 @@ const buyerSchema = mongoose.Schema({
     LastName: {type: String,required: true},
     TypeOfPet: {type: String,required: true},
     Cart: [{type:mongoose.Schema.Types.ObjectId, ref : 'Item'}]
+
 });
 
 module.exports = mongoose.model('Buyer', buyerSchema);

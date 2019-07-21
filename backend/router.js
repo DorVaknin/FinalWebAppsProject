@@ -3,39 +3,19 @@ const loginService = require("./LoginLogic");
 const authMiddleware = require("./authMiddleware");
 const Buyer = require('./models/Buyer');
 const Item = require('./models/Item');
-const ObjectId = require('mongodb').ObjectID;
+const mongoose = require('mongoose');
 const getUserMiddleware = require("./getUserMiddleware");
+const cartLogic = require("./CartLogic");
 ////////////////////////////////////// TODO - need to add before the authetication middleware the readme file
   // register screen //CHECKED and working
   router.post("/register", loginService.register);
   
   // login screen
   router.post('/login/', loginService.login);
-  ///TEST
-  //adding items to the DB
-  router.post("/admin", (req,res)=>{
-      console.log(req.body);
-    let item = new Item({
-        name: req.body.name,
-        desc: req.body.desc,
-        productType: req.body.productType,
-        pictureURL: req.body.pictureURL,
-        price: req.body.price,
-        animalType: req.body.animalType
-      })
-      item.save()
-      .then(() => {
-        res.status(200).send("The item added successfully to DB");
-      })
-      .catch(() => {
-        res.status(404).send('Request Failed');
-      });
-  })
-router.use(authMiddleware);// using the middleware that we defined
   
   ////////////////////////////////////////
   // admin screen // CHECKED and working.
-  router.get("/admin", (req,res)=>{
+  router.get("/admin/returnallusers", (req,res)=>{
   //return all users in data base
   Buyer.findOne({ID: ID, Password: encryptedPassword})
     .then(documents => { 
@@ -45,7 +25,7 @@ router.use(authMiddleware);// using the middleware that we defined
     });
   });
   //adding items to the DB
-  router.post("/admin", (req,res)=>{
+  router.post("/admin/additem", (req,res)=>{
     let item = new Item({
         name: req.post.name,
         desc: req.post.desc,
@@ -64,7 +44,7 @@ router.use(authMiddleware);// using the middleware that we defined
   })
 
   //delete users in admin screen // CHECKED and working.
-  router.delete("/admin/:id", (req,res) => {
+  router.delete("/admin/deleteuser/:id", (req,res) => {
     Buyer.deleteOne({_id: req.params.id})
     .then(() => {
       res.status(200).send("The user deleted successfully");
@@ -72,7 +52,7 @@ router.use(authMiddleware);// using the middleware that we defined
       res.status(404).send('Request Failed');
     });
   });
-  
+  router.use(authMiddleware); 
   // ////////////////////////
   // //store screen (home screen)
   //
@@ -82,28 +62,10 @@ router.use(authMiddleware);// using the middleware that we defined
   // })
   //
   router.use(getUserMiddleware);
-  ////////////////////////////////////////
-  //// cart screen
-  router.get('/cart/', (req,res)=> {
-    console.log(req.user);
-  });
-///TODO NOT WORKING
-  const addItemToBuyer = (userObjectID,itemObjectID) => {
-      console.log(userObjectID,itemObjectID);
-      console.log("_id", ObjectId(userObjectID))
-    //   return Buyer.updateOne({_id: userObjectID},{$push: {Cart: itemObjectID}});
-      return Buyer.findOneAndUpdate({_id : userObjectID},{ $push: {Cart: ObjectId(itemObjectID)}});
-  }
-  router.post('/cart/:item_id', (req,res) => {
-    const userObjectID = req.user._id;
-    const itemObjectID = req.params.item_id;
-    addItemToBuyer(userObjectID,itemObjectID).then(()=> {
-        res.status(200).send("Added the item successfully to the user");
-    }).catch(() => {
-        res.status(404).send("The item did not added successfully");
-    })
-  })
-  //
+  ////////////////////////////////////////cart screen
+  router.get('/cart/getusercart', cartLogic.getUserCart);//Checked and working
+  router.post('/cart/:item_id', cartLogic.addItem);//Checked and working
+
   // router.delete('/cart/:user_id/:item_id'){
   //   // send 200 status to user if everything went well
   // }

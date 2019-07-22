@@ -33,9 +33,9 @@ const addItem = (req,res) => {
 const deleteItem = (req,res) => {
   const userObjectID = req.user._id;
   const itemObjectID = req.params.item_id;
-  isItemExists(itemObjectID).then((item)=>{
+  Buyer.findOne({ _id: userObjectID, Cart : mongoose.Types.ObjectId(itemObjectID)}).then((item)=>{
     if (item == null) {
-      return res.status(404).send("Item does not exists in the database");
+      return res.status(404).send("Item does not exists in the users cart");
     }
     else{
       deleteItemFromBuyer(userObjectID,itemObjectID).then(()=> {

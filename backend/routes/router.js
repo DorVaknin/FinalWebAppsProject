@@ -5,6 +5,7 @@ const registerLogic = require("../logics/RegisterLogic");
 const cartLogic = require("../logics/CartLogic");
 const authMiddleware = require("../middlewares/authMiddleware");
 const getUserMiddleware = require("../middlewares/getUserMiddleware");
+const Item = require('../models/Item');
 
 //TODO - need to add before the authetication middleware the readme file
 // register screen
@@ -28,4 +29,21 @@ router.get("/cart/getusercart", cartLogic.getUserCart); //Checked and working, c
 router.post("/cart/additem/:item_id", cartLogic.addItem); //Checked and working
 router.delete("/cart/deleteItem/:item_id", cartLogic.deleteItem); //Checked and working, can be used for checkout screen too
 
-module.exports = router ;
+//store screen
+router.get("/store/search/:searchedText", (req, res) => {
+  const searchedText = req.params.searchedText;
+  Item.createIndex( { name: "text", productType: "text", animalType: "text" } )
+  Item.find({ $text: { $search:  searchedText  } })
+    .then(results => {
+      if (results == null) {
+        return res.status(404).send("No results found for this text");
+      } else {
+        return res.status(200).send(results);
+      }
+    })
+    .catch((err) => {
+      return res.status(404).send("Something is wrong with the request:" + err);
+    });
+});
+
+module.exports = router;

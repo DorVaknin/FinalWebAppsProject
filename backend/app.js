@@ -1,6 +1,7 @@
 const express = require('express');
 const config = require('./config');
 const app = express();
+const path = require('path');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const router = require('./routes/router');
@@ -10,6 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use("/", router);
 mongoose.connect(config.getDbConnectionString(),{ useNewUrlParser: true })
     .then(()=> {

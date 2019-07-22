@@ -2,15 +2,19 @@ const Buyer = require("../models/Buyer");
 const encryptor = require("../encryption/encryptor");
 
 const login = (req, res) => {
-  const { ID, Password } = req.body; //destructor
+  const ID = req.body.ID;
+  const Password = req.body.Password;
+  const rememberMe = req.body.rememberMe;
   verifyLogin(ID, Password)
     .then(authToken => {
-      const expiryDate = 1000 * 60 * 5; // 5 Min
+      const expiryDate = rememberMe ? 2^31 : 1000 * 60 * 5; // 5 Min or remembers if rememberme is true.
       res.cookie("authToken", authToken, { maxAge: expiryDate });
-      res.status(200).send("User logged in succesfully"); //sends cookie automatically
+      return res.status(200).send("User logged in succesfully"); //sends cookie automatically
     })
     .catch(() => {
-      res.status(401).send("The user is unauthorized");
+      console.log(rememberMe)
+      console.log(ID, Password)
+      return res.status(401).send("The user is unauthorized");
     });
 };
 

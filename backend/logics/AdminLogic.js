@@ -1,24 +1,30 @@
+const Buyer = require('../models/Buyer');
+
 const getUser = (req, res) => {
-  Buyer.findOne({ _id: req.params.objectid })
+  objectid = req.params.objectid
+  isUserExists(objectid)
     .then(user => {
-      if (user == null) {
-        res.status(404).send("User does not exists in the database");
+      console.log(user);
+      if (user === null) {
+        return res.status(404).send("User does not exists in the database");
       } else {
-        res.status(200).send(user);
+        return res.status(200).send(user);
       }
     })
     .catch(() => {
-      res.status(404).send("Something is wrong with the request");
+      return res.status(404).send("Something is wrong with the request");
     });
 };
+
+isUserExists = (objectid) => Buyer.findOne({ _id: objectid})      
 
 const getAllUsers = (req, res) => {
     Item.find({})
       .then(allItems => {
-        res.status(200).send(allItems);
+        return res.status(200).send(allItems);
       })
       .catch(() => {
-        res.status(404).send("Something is wrong with the request");
+        return res.status(404).send("Something is wrong with the request");
       });
   };
 
@@ -34,26 +40,35 @@ addItem = (req, res) => {
     item
       .save()
       .then(() => {
-        res.status(200).send("The item added successfully to DB");
+        return res.status(200).send("The item added successfully to DB");
       })
       .catch(() => {
-        res.status(404).send("Request Failed");
+        return res.status(404).send("Request Failed");
       });
   };
 
-deleteItem = (req, res) => {
-    Buyer.deleteOne({ _id: req.params.objectid })
-      .then(() => {
-        res.status(200).send("The user deleted successfully");
-      })
-      .catch(() => {
-        res.status(404).send("Request Failed");
-      });
+deleteUser = (req, res) => {
+    objectid = req.params.objectid;
+    isUserExists(objectid).then((user)=>{
+      if(user == null){
+        return res.status(404).send("User not found");
+      }else{
+        Buyer.deleteOne({ _id: req.params.objectid })
+        .then(() => {
+          return res.status(200).send("The user deleted successfully");
+        })
+        .catch((err) => {
+          return res.status(404).send("Request Failed" + err);
+        });
+      }
+    }).catch((err)=>{
+        return res.status("Request failed" + err);
+    });
   };
 
 module.exports = {
     getUser : getUser,
     getAllUsers: getAllUsers,
     addItem: addItem,
-    deleteItem : deleteItem
+    deleteUser : deleteUser
 }

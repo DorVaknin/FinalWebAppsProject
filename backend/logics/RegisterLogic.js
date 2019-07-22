@@ -13,10 +13,10 @@ const register = (req, res) => {
   buyer
     .save()
     .then(() => {
-      res.status(200).send("The buyer added successfully to DB");
+      return res.status(200).send("The buyer added successfully to DB");
     })
     .catch(err => {
-      res.status(404).send("Request Failed" + err);
+      return res.status(404).send("Request Failed" + err);
     });
 };
 

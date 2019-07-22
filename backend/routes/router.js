@@ -18,14 +18,14 @@ router.use(authMiddleware);
 router.use(getUserMiddleware);
 
 // admin screen
-router.get("/admin/getUser/:objectid", adminLogic.getUser);
+router.get("/admin/getuser/:objectid", adminLogic.getUser);
 router.get("/admin/getallitems", adminLogic.getAllUsers);
 router.post("/admin/additem", adminLogic.addItem);
-router.delete("/admin/deleteuser/:objectid", deleteItem);
+router.delete("/admin/deleteuser/:objectid", adminLogic.deleteUser);
 
 //cart + checkout screen
 router.get("/cart/getusercart", cartLogic.getUserCart); //Checked and working, can be used for checkout screen too.
-router.post("/cart/addItem/:item_id", cartLogic.addItem); //Checked and working
+router.post("/cart/additem/:item_id", cartLogic.addItem); //Checked and working
 router.delete("/cart/deleteItem/:item_id", cartLogic.deleteItem); //Checked and working, can be used for checkout screen too
 
 module.exports = router ;

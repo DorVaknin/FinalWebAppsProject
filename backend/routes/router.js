@@ -31,15 +31,15 @@ router.delete("/cart/deleteItem/:item_id", cartLogic.deleteItem); //Checked and 
 
 //store screen
 router.get("/store/search/:searchedText", (req, res) => {
-  const searchedText = req.params.searchedText;
-  Item.createIndex( { name: "text", productType: "text", animalType: "text" } )
-  Item.find({ $text: { $search:  searchedText  } })
+  const searchedText = req.params.searchedText;  
+  Item.find({$or:[{"productType":{$regex:".*"+ searchedText +".*"}},{"name":{$regex:".*"+ searchedText +".*"}}]})
     .then(results => {
       if (results == null) {
         return res.status(404).send("No results found for this text");
       } else {
         return res.status(200).send(results);
       }
+      
     })
     .catch((err) => {
       return res.status(404).send("Something is wrong with the request:" + err);

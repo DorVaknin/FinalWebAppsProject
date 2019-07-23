@@ -1,6 +1,6 @@
 const Buyer = require('../models/Buyer');
 
-const getUser = (req, res) => {
+const filterUserByObjectId = (req, res) => {
   objectid = req.params.objectid
   isUserExists(objectid)
     .then(user => {
@@ -66,9 +66,25 @@ deleteUser = (req, res) => {
     });
   };
 
+  filterByNameLastName = (req, res) => {
+    name = req.params.name;
+    lastname = req.params.lastname;
+    Buyer.findOne({ Name: name, LastName: lastname})
+      .then(user => {
+        if (user === null) {
+          return res.status(404).send("User does not exists in the database");
+        } else {
+          return res.status(200).send(user);
+        }
+      })
+      .catch(() => {
+        return res.status(404).send("Something is wrong with the request");
+      });
+  }; 
 module.exports = {
-    getUser : getUser,
+    filterUserByObjectId : filterUserByObjectId,
     getAllUsers: getAllUsers,
     addItem: addItem,
-    deleteUser : deleteUser
+    deleteUser : deleteUser,
+    filterByNameLastName: filterByNameLastName
 }

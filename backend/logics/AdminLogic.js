@@ -81,6 +81,7 @@ deleteUser = (req, res) => {
         return res.status(404).send("Something is wrong with the request");
       });
   }; 
+
 module.exports = {
     filterUserByObjectId : filterUserByObjectId,
     getAllUsers: getAllUsers,

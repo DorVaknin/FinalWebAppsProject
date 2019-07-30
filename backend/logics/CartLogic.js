@@ -50,6 +50,30 @@ const deleteItem = (req,res) => {
   
 }
 
+// const deleteAllItems = (req,res) => {
+//   const userObjectID = req.user._id;
+//   Buyer.find({ _id: userObjectID}).then((user)=>{
+//     if (user.length === 0) {
+//       return res.status(404).send("User does not exists");
+//     }
+//     else{
+//       user.Cart.forEach(item => deleteItemFromBuyer(userObjectID, item._id).then(
+
+//       ))
+
+
+//       deleteItemFromBuyer(userObjectID,itemObjectID).then(()=> {
+//         return res.status(200).send("Deleted the item successfully from the user's cart");
+//       }).catch((err) => {
+//         return res.status(404).send("Request Failed" + err);
+//       });
+//     }
+//   }).catch((err) => {
+//     return res.status(404).send("Request Failed" + err);
+//   });
+  
+// }
+
 const getUserCart = (req,res) => {
     return new Promise((resolve, reject) =>{
       Buyer.findOne({_id : req.user._id})

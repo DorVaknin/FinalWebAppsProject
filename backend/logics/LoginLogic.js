@@ -6,10 +6,10 @@ const login = (req, res) => {
   const Password = req.body.Password;
   const rememberMe = req.body.rememberMe;
   verifyLogin(ID, Password)
-    .then(authToken => {
+    .then(user => {
       const expiryDate = rememberMe ? 2^31 : 1000 * 60 * 5; // 5 Min or remembers if rememberme is true.
-      res.cookie("authToken", authToken, { maxAge: expiryDate });
-      return res.status(200).send("User logged in succesfully"); //sends cookie automatically
+      res.cookie("authToken", user._id, { maxAge: expiryDate });
+      return res.status(200).send({message: "User logged in succesfully", isAdmin: user.admin || false }); //sends cookie automatically
     })
     .catch(() => {
       console.log(rememberMe)
@@ -25,7 +25,11 @@ const getUserByIDAndPassword = (ID, encryptedPassword) => {
         if (user == null) {
           reject("Something is wrong with the credentials");
         }
-        resolve(user);
+        if (user.ID === 'admin'){
+          resolve({ ...user, admin: true });
+        } else {
+          resolve(user)
+        }
       })
       .catch(() => {
         reject("Something is wrong with the credentials");
@@ -38,7 +42,7 @@ const verifyLogin = (ID, password) => {
     const encryptedPass = encryptor(password.trim());
     getUserByIDAndPassword(ID, encryptedPass)
       .then(user => {
-        resolve(user._id); // returns authentication token
+        resolve(user); // returns authentication token
       })
       .catch(() => {
         reject();

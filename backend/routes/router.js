@@ -31,6 +31,7 @@ router.get("/admin/filter/byobjectid/:objectid", adminLogic.filterUserByObjectId
 router.get("/cart/getusercart", cartLogic.getUserCart); //Checked and working, can be used for checkout screen too.
 router.post("/cart/additem/:item_id", cartLogic.addItem); //Checked and working
 router.delete("/cart/deleteItem/:item_id", cartLogic.deleteItem); //Checked and working, can be used for checkout screen too
+// router.delete("/cart/deleteAll", cartLogic.deleteItem); //Checked and working, can be used for checkout screen too
 
 //store screen
 router.get("/store/search/:searchedText", storeLogic.search);
@@ -38,5 +39,8 @@ router.get("/store/search/:searchedText", storeLogic.search);
 //This route should be called by frontend in every activity change of the user.
 router.post("/setstatusbyid/:status", generalLogic.setStatus);
 
+router.get('*', function(req, res){
+    res.redirect('/defaultPage.html');
+});
 
 module.exports = router;

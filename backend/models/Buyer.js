@@ -6,6 +6,7 @@ const buyerSchema = mongoose.Schema({
     LastName: {type: String},
     TypeOfPet: {type: String},
     Cart: [{type:mongoose.Schema.Types.ObjectId, ref : 'Item'}],
+    Purchases: [{type:mongoose.Schema.Types.ObjectId, ref : 'Item'}],
     Status: {type:String}
 });
 

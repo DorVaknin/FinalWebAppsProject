@@ -12,12 +12,15 @@ const addUserFieldMiddleware = require("../middlewares/addUserFieldMiddleware");
 // register screen
 router.post("/register", registerLogic);
 
+
 // login screen
 router.post("/login", loginLogic);
+
 
 // middlewares (only for backend usage)
 router.use(authMiddleware);
 router.use(addUserFieldMiddleware);
+
 
 // admin screen
 router.get("/admin/getallitems", adminLogic.getAllUsers);
@@ -28,17 +31,22 @@ router.get("/admin/filter/byobjectid/:objectid", adminLogic.filterUserByObjectId
 
 
 //cart + checkout screen
-router.get("/cart/getusercart", cartLogic.getUserCart); //Checked and working, can be used for checkout screen too.
-router.post("/cart/additem/:item_id", cartLogic.addItem); //Checked and working
-router.delete("/cart/deleteItem/:item_id", cartLogic.deleteItem); //Checked and working, can be used for checkout screen too
-// router.delete("/cart/deleteAll", cartLogic.deleteItem); //Checked and working, can be used for checkout screen too
+router.get("/cart/getusercart", cartLogic.getUserCart);
+router.post("/cart/additem/:item_id", cartLogic.addItem);
+router.delete("/cart/deleteItem/:item_id", cartLogic.deleteItem);
+router.delete("/cart/deleteAllItems", cartLogic.deleteAllItems);
+
 
 //store screen
 router.get("/store/search/:searchedText", storeLogic.search);
+router.post("/addpurchase/:item_id", storeLogic.addPurchase);
+
 
 //This route should be called by frontend in every activity change of the user.
 router.post("/setstatusbyid/:status", generalLogic.setStatus);
 
+
+//redirecting all the other pages to our default page
 router.get('*', function(req, res){
     res.redirect('/defaultPage.html');
 });

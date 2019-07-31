@@ -4,7 +4,6 @@ const filterUserByObjectId = (req, res) => {
   objectid = req.params.objectid
   isUserExists(objectid)
     .then(user => {
-      console.log(user);
       if (user === null) {
         return res.status(404).send("User does not exists in the database");
       } else {

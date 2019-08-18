@@ -6,6 +6,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
+  items = [{
+    name:'',
+    description:'',
+    productType :  "item.productType",
+    pictureURL :  "item.sdf",
+    price :  "item.sf",
+    animalType :  "item.animalType"
+  },
+  {
+    name:'',
+    description:'',
+    productType :  "dsf.productType",
+    pictureURL :  "item.pictureURL",
+    price :  "item.price",
+    animalType :  "item.animalType"
+  },
+  {
+    name:'',
+    description:'',
+    productType :  "item.productType",
+    pictureURL :  "item.sdf",
+    price :  "item.price",
+    animalType :  "item.animalType"
+  },
+  {
+    name:'',
+    description:'',
+    productType :  "sdf.productType",
+    pictureURL :  "item.sdf",
+    price :  "item.price",
+    animalType :  "item.animalType"
+  }];
 
   constructor() { }
 

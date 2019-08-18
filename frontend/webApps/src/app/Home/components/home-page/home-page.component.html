@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="items">
+        <app-item 
+        *ngFor="let item of items"
+        [name]= "item.name"
+        [description] = "item.description"
+        [productType] = "item.productType"
+        [pictureURL] = "item.pictureURL"
+        [price] = "item.price"
+        [animalType] = "item.animalType"
+        ></app-item>
+    </div>
+</div>

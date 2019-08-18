@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { UserStatusService } from '../../../Shared/Services/user-status.service';
 
 @Component({
   selector: 'app-login-component',
@@ -10,14 +11,15 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent implements OnInit {
   name = '';
   email = '';
-  constructor(private router: Router, private http: HttpClient ) { }
+  constructor(private router: Router, private http: HttpClient, private userStatusService: UserStatusService ) { }
 
   ngOnInit() {
   }
 
   onLogin(){
     // this.http.post()
-    this.router.navigate(['/home-page']);
+    this.userStatusService.isLoggedIn = true;
+    this.router.navigate(['/home']);
   }
 
   switchToSignUp(){

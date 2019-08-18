@@ -8,7 +8,7 @@ import { HomePageComponent } from './Home/components/home-page/home-page.compone
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
-  {path: 'home-page', component: HomePageComponent},
+  {path: 'home', component: HomePageComponent},
 ];
 
 @NgModule({

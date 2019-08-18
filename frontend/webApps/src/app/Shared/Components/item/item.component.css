@@ -1,3 +1,5 @@
-.container {
-    display: flex;
+.biscuit-card {
+    text-align: center;
+    width: 300px;
+    margin: 50px 0px;
 }

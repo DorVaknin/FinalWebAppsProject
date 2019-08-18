@@ -10,18 +10,15 @@
       <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
     </div>
     <div class="buttons-container">
-      <button type="submit" class="btn btn-success" (click)="onLogin()" [disabled]="!form.form.valid">Submit</button>
+      <button type="submit" class="btn btn-success" (click)="onLogin()" [disabled]="!form.form.valid">Log in</button>
       <button type="button" class="btn btn-info" (click)="switchToSignUp()">Sign up</button>
     </div>
   </form>
 </div>
-<!-- 
-<app-item
-name = 'df'
-description = 'sdfd'
-price = 3
-animalType = 'Dog'
-pictureURL = 'df'
-productType= 'toy'
-> 
-</app-item> -->
+
+
+
+  <!-- <span>
+    <label for="remember">Rememeber me</label>
+    <input type="checkbox" id="remember">
+  </span> -->

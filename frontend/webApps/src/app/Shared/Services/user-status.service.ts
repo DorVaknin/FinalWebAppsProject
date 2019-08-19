@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -6,10 +8,15 @@ import { Injectable } from '@angular/core';
 export class UserStatusService {
   isLoggedIn = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  setLoginState(isLoggedIn){
-    this.isLoggedIn = isLoggedIn;
+  logIn(){
+    this.isLoggedIn = true;
+  }
+
+  logOut(){
+    this.isLoggedIn = false;
+    this.router.navigate(['/login'])
   }
 
 }

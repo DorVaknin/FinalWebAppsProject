@@ -1,5 +1,10 @@
 .items{
+    margin-top: 5%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+h1, h3{
+    text-align: center;
 }

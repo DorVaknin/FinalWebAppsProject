@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(){
     // this.http.post()
-    this.userStatusService.isLoggedIn = true;
+    this.userStatusService.logIn();
     this.router.navigate(['/home']);
   }
 

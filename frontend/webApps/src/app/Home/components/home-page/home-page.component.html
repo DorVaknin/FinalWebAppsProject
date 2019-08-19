@@ -1,6 +1,9 @@
 <div class="container">
     <h1>BISCUIT</h1>
-    <h3>GIVE YOUR PETS WHAT THEY DESERVE</h3>
+    <h4 class="text-muted">GIVE YOUR PETS WHAT THEY DESERVE</h4>
+    <input type="text" placeholder="Search..." [(ngModel)]="textualSearch">
+</div>
+<div class="container card">
     <div class="items">
         <app-item 
         *ngFor="let item of items"
@@ -13,3 +16,6 @@
         ></app-item>
     </div>
 </div>
+
+
+<app-item-page></app-item-page>

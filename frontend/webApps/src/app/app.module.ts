@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './Auth/auth.module';
 import { HomeModule } from './Home/components/home.module';
 import { SharedModule } from './Shared/shared.module';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+
+
 
 @NgModule({
   declarations: [
@@ -18,7 +21,7 @@ import { SharedModule } from './Shared/shared.module';
     HttpClientModule,
     AuthModule,
     HomeModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

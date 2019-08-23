@@ -6,7 +6,8 @@
 <div class="container card">
     <div class="items">
         <app-item 
-        *ngFor="let item of items"
+        class="item"
+        *ngFor="let item of newItems"
         [name]= "item.name"
         [description] = "item.description"
         [productType] = "item.productType"
@@ -15,7 +16,11 @@
         [animalType] = "item.animalType"
         ></app-item>
     </div>
+    <pagination
+    class="pagination"
+    [totalItems]="items.length"
+    [itemsPerPage]="12"
+    [(ngModel)]="currentPage"
+    (pageChanged)="onPageChanged($event)"
+    ></pagination>
 </div>
-
-
-<app-item-page></app-item-page>

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
   textualSearch = '';
+  currentPage = 1;
   items = [
     {
     name:'',
@@ -353,10 +354,21 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
 ];
+newItems = [];
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.items.length);
+    this.newItems = this.items.slice(0,12);
+  }
+
+  onPageChanged(event){
+    console.log(event);
+    const currentItems = (event.page - 1)*12;
+    console.log(currentItems);
+    this.newItems = this.items.slice(currentItems, currentItems + 12);
+
   }
 
 }

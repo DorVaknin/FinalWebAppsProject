@@ -4,12 +4,10 @@ import { ItemComponent } from './Components/item/item.component';
 import { NavigationComponent } from './Components/navigation/navigation.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ItemPageComponent } from './Components/item-page/item-page.component';
 
 const components = [
   ItemComponent,
   NavigationComponent,
-  ItemPageComponent
 ];
 
 const modules = [

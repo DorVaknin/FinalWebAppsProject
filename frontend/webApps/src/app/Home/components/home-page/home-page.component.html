@@ -1,26 +1,26 @@
 <div class="container">
-    <h1>BISCUIT</h1>
-    <h4 class="text-muted">GIVE YOUR PETS WHAT THEY DESERVE</h4>
-    <input type="text" placeholder="Search..." [(ngModel)]="textualSearch">
+  <h1>BISCUIT</h1>
+  <h4 class="text-muted">GIVE YOUR PETS WHAT THEY DESERVE</h4>
+  <input (input)="onTextChanged()" type="text" placeholder="Search..." [(ngModel)]="textualSearch">
 </div>
 <div class="container card">
-    <div class="items">
-        <app-item 
-        class="item"
-        *ngFor="let item of newItems"
-        [name]= "item.name"
-        [description] = "item.description"
-        [productType] = "item.productType"
-        [pictureURL] = "item.pictureURL"
-        [price] = "item.price"
-        [animalType] = "item.animalType"
-        ></app-item>
-    </div>
-    <pagination
-    class="pagination"
-    [totalItems]="items.length"
-    [itemsPerPage]="12"
-    [(ngModel)]="currentPage"
-    (pageChanged)="onPageChanged($event)"
-    ></pagination>
+  <div class="items">
+    <app-item 
+    class="item"
+    *ngFor="let item of newItems"
+    [name]= "item.name"
+    [description] = "item.description"
+    [productType] = "item.productType"
+    [pictureURL] = "item.pictureURL"
+    [price] = "item.price"
+    [animalType] = "item.animalType"
+    ></app-item>
+  </div>
+  <pagination
+  class="pagination"
+  [totalItems]="items.length"
+  [itemsPerPage]="12"
+  [(ngModel)]="currentPage"
+  (pageChanged)="onPageChanged($event)"
+  ></pagination>
 </div>

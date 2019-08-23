@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { debounce } from 'lodash';
 
 @Component({
   selector: 'app-home-page',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
+  onTextChanged = debounce(() => {
+    console.log('click');
+  }, 500);
   textualSearch = '';
   currentPage = 1;
   items = [
@@ -359,16 +363,11 @@ newItems = [];
   constructor() { }
 
   ngOnInit() {
-    console.log(this.items.length);
     this.newItems = this.items.slice(0,12);
   }
 
   onPageChanged(event){
-    console.log(event);
     const currentItems = (event.page - 1)*12;
-    console.log(currentItems);
     this.newItems = this.items.slice(currentItems, currentItems + 12);
-
   }
-
 }

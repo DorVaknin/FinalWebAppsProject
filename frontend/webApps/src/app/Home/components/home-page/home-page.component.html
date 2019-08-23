@@ -1,7 +1,10 @@
 <div class="container">
+  <img src="https://avada.theme-fusion.com/veterinarian/wp-content/uploads/sites/80/2016/11/pets_big.png">
   <h1>BISCUIT</h1>
   <h4 class="text-muted">GIVE YOUR PETS WHAT THEY DESERVE</h4>
-  <input (input)="onTextChanged()" type="text" placeholder="Search..." [(ngModel)]="textualSearch">
+  <div class="md-form mt-0">
+    <input type="text" class="form-control" placeholder="Search..." aria-label="Search" (input)="onTextChanged()" [(ngModel)]="textualSearch">
+  </div>
 </div>
 <div class="container card">
   <div class="items">

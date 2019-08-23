@@ -5,6 +5,8 @@
         <p class="card-title">{{name}}</p>
         <p class="card-description"> {{ description }} </p>
         <p class="card-footer">Price : {{price}}</p>
-        <a href="#" class="btn btn-primary">Add to cart</a>
+        <a (click)="addToCart()" class="btn btn-primary">Add to cart</a>
     </div>
 </div>
+
+<button (click)= "showCart()">Show Cart</button>

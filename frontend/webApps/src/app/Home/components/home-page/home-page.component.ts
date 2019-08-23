@@ -246,7 +246,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'DSFD',
     description:'',
     productType :  "dsf.productType",
     pictureURL :  "item.pictureURL",
@@ -254,7 +254,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'ASDF',
     description:'',
     productType :  "item.productType",
     pictureURL :  "item.sdf",
@@ -270,7 +270,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'DSAFD',
     description:'',
     productType :  "dsf.productType",
     pictureURL :  "item.pictureURL",
@@ -278,7 +278,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'sfdsF',
     description:'',
     productType :  "item.productType",
     pictureURL :  "item.sdf",
@@ -286,7 +286,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'ds',
     description:'',
     productType :  "item.productType",
     pictureURL :  "item.sdf",
@@ -294,7 +294,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'sdgdfs',
     description:'',
     productType :  "dsf.productType",
     pictureURL :  "item.pictureURL",
@@ -302,7 +302,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'s',
     description:'',
     productType :  "item.productType",
     pictureURL :  "item.sdf",
@@ -310,7 +310,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'sdfgdf',
     description:'',
     productType :  "item.productType",
     pictureURL :  "item.sdf",
@@ -318,7 +318,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'sdfgfdg',
     description:'',
     productType :  "dsf.productType",
     pictureURL :  "item.pictureURL",
@@ -326,7 +326,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'dsgdf',
     description:'',
     productType :  "item.productType",
     pictureURL :  "item.sdf",
@@ -334,7 +334,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'ghghg',
     description:'',
     productType :  "item.productType",
     pictureURL :  "item.sdf",
@@ -342,7 +342,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'gfgf',
     description:'',
     productType :  "dsf.productType",
     pictureURL :  "item.pictureURL",
@@ -350,7 +350,7 @@ export class HomePageComponent implements OnInit {
     animalType :  "item.animalType"
   },
   {
-    name:'',
+    name:'dfg',
     description:'',
     productType :  "item.productType",
     pictureURL :  "item.sdf",
@@ -370,4 +370,5 @@ newItems = [];
     const currentItems = (event.page - 1)*12;
     this.newItems = this.items.slice(currentItems, currentItems + 12);
   }
+
 }

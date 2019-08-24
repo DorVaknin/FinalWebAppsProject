@@ -8,8 +8,6 @@ import { AuthModule } from './Auth/auth.module';
 import { HomeModule } from './Home/components/home.module';
 import { SharedModule } from './Shared/shared.module';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

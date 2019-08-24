@@ -12,12 +12,18 @@ export class CartService {
     this.itemsInCart[itemID] = itemID in this.itemsInCart ? this.itemsInCart[itemID] + 1 : 1;
   }
 
-  deleteItem(itemID: string) {
+  deduceOne(itemID: string) {
     if (itemID in this.itemsInCart) {
       this.itemsInCart[itemID] = this.itemsInCart[itemID] - 1;
       if (!this.itemsInCart[itemID]) {
         delete this.itemsInCart[itemID];
       }
+    }
+  }
+
+  deleteItem(itemID){
+    if (itemID in this.itemsInCart) {
+      delete this.itemsInCart[itemID];
     }
   }
 

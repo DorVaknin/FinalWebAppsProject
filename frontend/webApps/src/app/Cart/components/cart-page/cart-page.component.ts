@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CartService } from '../../../Shared/Services/cart.service';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
-import { ItemInterface } from 'src/app/Shared/types.interface';
+
+import { CartService } from '../../../Shared/Services/cart.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -11,8 +12,10 @@ import { ItemInterface } from 'src/app/Shared/types.interface';
 export class CartPageComponent implements OnInit, OnDestroy {
   cartItems = {};
   cartChanged = new Subject();
+  
+  @ViewChild('content', {static: true} ) modalRef :NgbModalRef;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.cartItems = this.cartService.items;
@@ -21,16 +24,6 @@ export class CartPageComponent implements OnInit, OnDestroy {
 
   removeItem(itemId){
     this.cartService.deleteItem(itemId);
-    this.cartChanged.next();
-  }
-
-  deduceOne(item: ItemInterface){
-    this.cartService.deduceOne(item);
-    this.cartChanged.next();
-  }
-
-  addOne(item: ItemInterface){
-    this.cartService.addItem(item);
     this.cartChanged.next();
   }
 
@@ -43,8 +36,9 @@ export class CartPageComponent implements OnInit, OnDestroy {
     this.cartChanged.unsubscribe();
   }
 
-  printItem(){
-    console.log(this.cartItems);
+  openModal(item){
+    this.modalService.open(this.modalRef, {
+      size: 'lg'
+    }).result.then(result => this.removeItem(item.name), () => {});
   }
-
 }

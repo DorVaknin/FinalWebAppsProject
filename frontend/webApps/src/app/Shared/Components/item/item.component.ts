@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ItemInterface } from '../../types.interface';
 import { CartService } from '../../Services/cart.service';
 
@@ -15,6 +15,8 @@ export class ItemComponent implements ItemInterface, OnInit {
   @Input() price = null;
   @Input() animalType = '';
   @Input() isInCart = false
+
+  @Output() askIfDeleteItem: EventEmitter<ItemInterface> = new EventEmitter();
   
   amountInCart = 0;
 
@@ -29,13 +31,17 @@ export class ItemComponent implements ItemInterface, OnInit {
     this.amountInCart = this.cartService.getAmountOfItem(this.name);
   }
   
-  showCart(){
-    console.log(this.cartService.items);
+  deduct(){
+    if (this.amountInCart === 1){
+      this.askIfDeleteItem.emit(this);
+    } else {
+      this.cartService.deduceOne(this);
+      this.amountInCart = this.cartService.getAmountOfItem(this.name);
+    }
   }
   
-  deduct(){
-    this.cartService.deduceOne(this);
-    this.amountInCart = this.cartService.getAmountOfItem(this.name);
+  showCart(){
+    console.log(this.cartService.items);
   }
 
 }

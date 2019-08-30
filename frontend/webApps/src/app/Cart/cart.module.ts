@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { SharedModule } from '../Shared/shared.module';
@@ -10,6 +11,7 @@ import { SharedModule } from '../Shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
+    NgbModalModule,
     RouterModule.forChild([
       { path: '' , component: CartPageComponent }
     ])

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { get } from 'lodash';
+import { ItemInterface } from '../types.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +10,23 @@ export class CartService {
 
   constructor() { }
 
-  addItem(itemID: string) {
-    this.itemsInCart[itemID] = itemID in this.itemsInCart ? this.itemsInCart[itemID] + 1 : 1;
+  addItem(item: ItemInterface) {
+    if (!(item.name in this.itemsInCart)) {
+      this.itemsInCart[item.name] = item;
+    } 
+      this.itemsInCart[item.name].amountInCart = this.itemsInCart[item.name].amountInCart + 1;
   }
 
-  deduceOne(itemID: string) {
-    if (itemID in this.itemsInCart) {
-      this.itemsInCart[itemID] = this.itemsInCart[itemID] - 1;
-      if (!this.itemsInCart[itemID]) {
-        delete this.itemsInCart[itemID];
+  deduceOne(item: ItemInterface) {
+    if (item.name in this.itemsInCart) {
+      this.itemsInCart[item.name].amountInCart = this.itemsInCart[item.name].amountInCart - 1;
+      if (!this.itemsInCart[item.name].amountInCart) {
+        this.deleteItem(item.name);
       }
     }
   }
 
-  deleteItem(itemID){
+  deleteItem(itemID: string){
     if (itemID in this.itemsInCart) {
       delete this.itemsInCart[itemID];
     }
@@ -29,6 +34,10 @@ export class CartService {
 
   clearCart() {
     this.itemsInCart = {};
+  }
+
+  getAmountOfItem(itemID: string){
+    return get(this.itemsInCart, `[${itemID}].amountInCart`) || 0;
   }
 
   get items(){

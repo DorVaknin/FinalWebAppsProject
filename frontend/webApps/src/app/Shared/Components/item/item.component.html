@@ -5,8 +5,16 @@
         <p class="card-title">{{name}}</p>
         <p class="card-description"> {{ description }} </p>
         <p class="card-footer">Price : {{price}}</p>
-        <a (click)="addToCart()" class="btn btn-primary">Add to cart</a>
+        <a *ngIf="!isInCart else inCartTemplate" (click)="addToCart()" class="btn btn-primary">Add to cart</a>
     </div>
 </div>
 
 <button (click)= "showCart()">Show Cart</button>
+
+<ng-template #inCartTemplate>
+    <div class="buttons-template flex">
+        <button (click)="addToCart()">+</button>
+        <span>{{amountInCart}}</span>
+        <button (click)="deduct()">-</button>
+    </div>
+</ng-template>

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartService } from '../../../Shared/Services/cart.service';
 import { Subject } from 'rxjs';
+import { ItemInterface } from 'src/app/Shared/types.interface';
 
 @Component({
   selector: 'app-cart-page',
@@ -23,13 +24,13 @@ export class CartPageComponent implements OnInit, OnDestroy {
     this.cartChanged.next();
   }
 
-  deduceOne(itemId){
-    this.cartService.deduceOne(itemId);
+  deduceOne(item: ItemInterface){
+    this.cartService.deduceOne(item);
     this.cartChanged.next();
   }
 
-  addOne(itemId){
-    this.cartService.addItem(itemId);
+  addOne(item: ItemInterface){
+    this.cartService.addItem(item);
     this.cartChanged.next();
   }
 

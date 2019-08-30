@@ -14,17 +14,28 @@ export class ItemComponent implements ItemInterface, OnInit {
   @Input() pictureURL = '';
   @Input() price = null;
   @Input() animalType = '';
+  @Input() isInCart = false
+  
+  amountInCart = 0;
 
   constructor(private cartService: CartService) { }
 
   ngOnInit() {
+    this.amountInCart = this.cartService.getAmountOfItem(this.name) || 0;
   }
 
   addToCart(){
-    this.cartService.addItem(this.name);
+    this.cartService.addItem(this);
+    this.amountInCart = this.cartService.getAmountOfItem(this.name);
   }
-
+  
   showCart(){
     console.log(this.cartService.items);
   }
+  
+  deduct(){
+    this.cartService.deduceOne(this);
+    this.amountInCart = this.cartService.getAmountOfItem(this.name);
+  }
+
 }

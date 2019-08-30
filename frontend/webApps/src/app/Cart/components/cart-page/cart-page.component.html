@@ -1,7 +1,13 @@
-<div class="container">
+<div class="container flex">
   <div *ngFor="let item of cartItems | keyvalue" class="card">
-    <h1>hello</h1>
+    <app-item
+    [name]='item.value.name'
+    [description]='item.value.description'
+    [productType]='item.value.productType'
+    [pictureURL]='item.value.pictureURL'
+    [price]='item.value.price'
+    [animalType]='item.value.animalType'
+    [isInCart]="true"
+    ></app-item>
   </div>
 </div>
-
-<button (click)="printItem()">CLICK ME</button>

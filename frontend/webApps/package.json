@@ -21,6 +21,8 @@
     "@angular/router": "~8.1.1",
     "@ng-bootstrap/ng-bootstrap": "^5.1.0",
     "@types/lodash": "^4.14.138",
+    "ag-grid-angular": "^21.2.0",
+    "ag-grid-community": "^21.2.0",
     "bootstrap": "^4.3.1",
     "lodash": "^4.17.15",
     "ngx-bootstrap": "^5.1.1",

@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'home', component: HomePageComponent},
   {path: 'cart', loadChildren: () => import('./Cart/cart.module').then(m => m.CartModule)},
+  {path: 'admin', loadChildren: () => import('./Admin-screen/admin-module.module').then(m => m.AdminModuleModule)},
   {path: '**', redirectTo: 'home'}
 ];
 

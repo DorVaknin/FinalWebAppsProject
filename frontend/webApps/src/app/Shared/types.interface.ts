@@ -1,4 +1,4 @@
-export type ItemInterface = {
+export interface ItemInterface {
   name : string
   description : string
   productType : string

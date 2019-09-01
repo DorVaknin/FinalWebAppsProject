@@ -12,8 +12,9 @@ import { CartService } from '../../../Shared/Services/cart.service';
 export class CartPageComponent implements OnInit, OnDestroy {
   cartItems = {};
   cartChanged = new Subject();
+  askIfDeleteItemName = '';
   
-  @ViewChild('content', {static: true} ) modalRef :NgbModalRef;
+  @ViewChild('modalTemplateRef', {static: true} ) modalTemplateRef :NgbModalRef;
 
   constructor(private cartService: CartService, private modalService: NgbModal) { }
 
@@ -37,8 +38,10 @@ export class CartPageComponent implements OnInit, OnDestroy {
   }
 
   openModal(item){
-    this.modalService.open(this.modalRef, {
-      size: 'lg'
-    }).result.then(result => this.removeItem(item.name), () => {});
+    this.askIfDeleteItemName = item.name;
+    this.modalService.open(this.modalTemplateRef, {
+      size: 'sm',
+      centered: true
+    }).result.then(() => this.removeItem(item.name), () => {});
   }
 }

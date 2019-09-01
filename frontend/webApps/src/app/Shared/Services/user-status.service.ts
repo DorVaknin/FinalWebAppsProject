@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 })
 export class UserStatusService {
   isLoggedIn = false;
+  isAdmin = false;
 
   constructor(private router: Router) { }
 
@@ -16,7 +17,13 @@ export class UserStatusService {
 
   logOut(){
     this.isLoggedIn = false;
+    this.isAdmin = false;
     this.router.navigate(['/login'])
+  }
+
+  logInAsAdmin(){
+    this.isLoggedIn = true;
+    this.isAdmin = true;
   }
 
 }

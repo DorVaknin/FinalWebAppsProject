@@ -26,4 +26,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['signup']);
   }
 
+  logAdmin(){
+    this.userStatusService.logInAsAdmin();
+  }
 }

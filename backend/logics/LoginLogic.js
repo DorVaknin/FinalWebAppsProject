@@ -9,6 +9,7 @@ const login = (req, res) => {
     .then(user => {
       const expiryDate = rememberMe ? 2^31 : 1000 * 60 * 5; // 5 Min or remembers if rememberme is true.
       res.cookie("authToken", user._id, { maxAge: expiryDate });
+      res.header("Access-Control-Allow-Origin", "*");
       return res.status(200).send({message: "User logged in succesfully", isAdmin: user.admin || false }); //sends cookie automatically
     })
     .catch(() => {

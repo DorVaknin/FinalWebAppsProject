@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { UserStatusService } from '../../../Shared/Services/user-status.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {UserStatusService} from '../../../Shared/Services/user-status.service';
 
 @Component({
   selector: 'app-login-component',
@@ -11,22 +11,24 @@ import { UserStatusService } from '../../../Shared/Services/user-status.service'
 export class LoginComponent implements OnInit {
   name = '';
   email = '';
-  constructor(private router: Router, private http: HttpClient, private userStatusService: UserStatusService ) { }
+
+  constructor(private router: Router, private http: HttpClient, private userStatusService: UserStatusService) {
+  }
 
   ngOnInit() {
   }
 
-  onLogin(){
+  onLogin() {
     // this.http.post()
-    this.userStatusService.logIn();
+    this.userStatusService.logIn(this.name, this.email);
     this.router.navigate(['/home']);
   }
 
-  switchToSignUp(){
+  switchToSignUp() {
     this.router.navigate(['signup']);
   }
 
-  logAdmin(){
+  logAdmin() {
     this.userStatusService.logInAsAdmin();
   }
 }

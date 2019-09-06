@@ -10,7 +10,7 @@ import {UserStatusService} from '../../../Shared/Services/user-status.service';
 })
 export class LoginComponent implements OnInit {
   name = '';
-  email = '';
+  password = '';
 
   constructor(private router: Router, private http: HttpClient, private userStatusService: UserStatusService) {
   }
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     // this.http.post()
-    this.userStatusService.logIn(this.name, this.email);
+    this.userStatusService.logIn(this.name, this.password);
     this.router.navigate(['/home']);
   }
 

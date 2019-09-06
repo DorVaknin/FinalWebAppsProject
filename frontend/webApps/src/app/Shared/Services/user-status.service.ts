@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {log} from 'util';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 const HTTP_OK = 200;
 const HTTP_UNAUTHORIZED = 401;
@@ -17,13 +16,14 @@ export class UserStatusService {
   }
 
   logIn(userId, password) {
-    this.http.post('http://127.0.0.1:8080/login', {
+    const body =  {
       ID: userId,
       Password: password
-    }).subscribe(response => {
+    };
+    this.http.post('http://127.0.0.1:8080/login',body).subscribe(response => {
         console.log(response);
       },
-      error => log(error));
+      error => console.error(error));
     this.isLoggedIn = true;
   }
 

@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Log In</h1>
-  <form #form="ngForm">
+  <form #form="ngForm" (ngSubmit)="onLogin()">
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name" required>
@@ -10,7 +10,7 @@
       <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
     </div>
     <div class="buttons-container">
-      <button type="submit" class="btn btn-success" (click)="onLogin()" [disabled]="!form.form.valid">Log in</button>
+      <button type="submit" class="btn btn-success" [disabled]="!form.form.valid">Log in</button>
       <button type="button" class="btn btn-info" (click)="switchToSignUp()">Sign up</button>
     </div>
   </form>

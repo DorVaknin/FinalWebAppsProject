@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserStatusService } from '../../Services/user-status.service';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,13 +8,13 @@ import { UserStatusService } from '../../Services/user-status.service';
 })
 export class NavigationComponent implements OnInit {
   
-  constructor(private userStatusService: UserStatusService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   logOut(){
-    this.userStatusService.logOut();
+    this.authService.logOut();
   }
 
 }

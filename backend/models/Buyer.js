@@ -4,7 +4,6 @@ const buyerSchema = mongoose.Schema({
     Password: {type: String, required: true},
     Name:  {type: String},
     LastName: {type: String},
-    TypeOfPet: {type: String},
     Cart: [{type:mongoose.Schema.Types.ObjectId, ref : 'Item'}],
     Purchases: [{type:mongoose.Schema.Types.ObjectId, ref : 'Item'}],
     Status: {type:String}

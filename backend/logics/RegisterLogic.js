@@ -7,8 +7,7 @@ const register = (req, res) => {
     Password: encryptor(req.body.Password.trim()),
     Name: req.body.Name,
     LastName: req.body.LastName,
-    TypeOfPet: req.body.TypeOfPet,
-    Cart: req.body.Cart
+    Cart: []
   });
   buyer
     .save()

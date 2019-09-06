@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {UserStatusService} from '../../../Shared/Services/user-status.service';
+import { AuthService } from '../../../Shared/Services/auth.service';
 
 @Component({
   selector: 'app-login-component',
@@ -11,17 +11,26 @@ import {UserStatusService} from '../../../Shared/Services/user-status.service';
 export class LoginComponent implements OnInit {
   name = '';
   password = '';
+  dispalyErrorLoginMessage = false;
+  displayLodaer = false;
 
-  constructor(private router: Router, private http: HttpClient, private userStatusService: UserStatusService) {
+  constructor(private router: Router, private http: HttpClient, private authService: AuthService) {
   }
 
   ngOnInit() {
   }
 
-  onLogin() {
+  async onLogin() {
     // this.http.post()
-    this.userStatusService.logIn(this.name, this.password);
-    this.router.navigate(['/home']);
+    this.dispalyErrorLoginMessage = false;
+    this.displayLodaer = true;
+    await this.authService.logIn(this.name, this.password);
+    if (this.authService.isLoggedIn) {
+      this.router.navigate(['/home']);
+    } else {
+      this.displayLodaer= false;
+      this.dispalyErrorLoginMessage = true;
+    }
   }
 
   switchToSignUp() {
@@ -29,6 +38,6 @@ export class LoginComponent implements OnInit {
   }
 
   logAdmin() {
-    this.userStatusService.logInAsAdmin();
+    this.authService.logInAsAdmin();
   }
 }

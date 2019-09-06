@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../Shared/Services/auth.service';
 
 
 @Component({
@@ -8,7 +8,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  name = '';
+  username = ''
+  firstName = ''
+  lastName = ''
   email = '';
   password = '';
   passwordConfirm = '';
@@ -16,11 +18,11 @@ export class SignupComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit() { 
+  ngOnInit() {
   }
 
-  onSignUp(){
-   this.authService.registerNewUser(this.name, this.email, this.password);
+  onSignUp() {
+    this.authService.registerNewUser(this.username, this.firstName, this.lastName, this.password);
   }
 
 }

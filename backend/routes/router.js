@@ -8,14 +8,30 @@ const cartLogic = require("../logics/CartLogic");
 const authMiddleware = require("../middlewares/authMiddleware");
 const addUserFieldMiddleware = require("../middlewares/addUserFieldMiddleware");
 
-//TODO - need to add before the authetication middleware the readme file
+router.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
+
 // register screen
 router.post("/register", registerLogic);
 
-
 // login screen
 router.post("/login", loginLogic);
-
 
 // middlewares (only for backend usage)
 router.use(authMiddleware);
@@ -23,7 +39,8 @@ router.use(addUserFieldMiddleware);
 
 
 // admin screen
-router.get("/admin/getallitems", adminLogic.getAllUsers);
+router.get("/admin/getallusers", adminLogic.getAllUser);
+router.get("/admin/getallitems", adminLogic.getAllItems);
 router.post("/admin/additem", adminLogic.addItem);
 router.delete("/admin/deleteuser/:objectid", adminLogic.deleteUser);
 router.get("/admin/filter/bynameandlastname/:name/:lastname", adminLogic.filterByNameLastName);

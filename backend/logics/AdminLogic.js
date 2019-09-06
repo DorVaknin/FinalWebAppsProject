@@ -1,5 +1,5 @@
 const Buyer = require('../models/Buyer');
-
+const Item = require('../models/Item');
 const filterUserByObjectId = (req, res) => {
   objectid = req.params.objectid
   isUserExists(objectid)
@@ -17,7 +17,7 @@ const filterUserByObjectId = (req, res) => {
 
 isUserExists = (objectid) => Buyer.findOne({ _id: objectid})      
 
-const getAllUsers = (req, res) => {
+const getAllItems = (req, res) => {
     Item.find({})
       .then(allItems => {
         return res.status(200).send(allItems);
@@ -27,14 +27,25 @@ const getAllUsers = (req, res) => {
       });
   };
 
+  const getAllUser = (req, res) => {
+    Buyer.find({})
+      .then(allUser => {
+        return res.status(200).send(allUser);
+      })
+      .catch(() => {
+        return res.status(404).send("Something is wrong with the request");
+      });
+  };
+  
 addItem = (req, res) => {
+    console.log(req)
     let item = new Item({
-      name: req.post.name,
-      desc: req.post.desc,
-      productType: req.post.productType,
-      pictureURL: req.post.pictureURL,
-      price: req.post.price,
-      animalType: req.post.animalType
+      name: req.body.name,
+      desc: req.body.desc,
+      productType: req.body.productType,
+      pictureURL: req.body.pictureURL,
+      price: req.body.price,
+      animalType: req.body.animalType
     });
     item
       .save()
@@ -82,8 +93,9 @@ deleteUser = (req, res) => {
   }; 
 
 module.exports = {
+    getAllUser: getAllUser,
     filterUserByObjectId : filterUserByObjectId,
-    getAllUsers: getAllUsers,
+    getAllItems: getAllItems,
     addItem: addItem,
     deleteUser : deleteUser,
     filterByNameLastName: filterByNameLastName

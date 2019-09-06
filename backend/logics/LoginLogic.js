@@ -25,8 +25,10 @@ const getUserByIDAndPassword = (ID, encryptedPassword) => {
           reject("Something is wrong with the credentials");
         }
         if (user.ID === 'admin'){
-          resolve({ ...user, admin: true });
+          user.isAdmin = true;
+          resolve(user);
         } else {
+          user.isAdmin = false;
           resolve(user)
         }
       })

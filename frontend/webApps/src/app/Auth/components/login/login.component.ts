@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   }
 
   async onLogin() {
-    // this.http.post()
     this.dispalyErrorLoginMessage = false;
     this.displayLodaer = true;
     await this.authService.logIn(this.name, this.password);

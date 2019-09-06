@@ -42,6 +42,9 @@ export class AuthService {
     await this.http.post(`${SERVER_URL}/login`,body,{ observe: 'response' }).toPromise().then(response => {
         if (response.status === HTTP_OK) {
           this.isLoggedIn = true;
+          if ((<any>response.body).isAdmin) {
+            this.isAdmin = true;
+          }
         }
       },
         error => {

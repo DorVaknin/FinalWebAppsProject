@@ -3,12 +3,12 @@
     <li><a [routerLink]="['/cart']">Cart</a></li>
     <li *ngIf="authService.isAdmin"><a [routerLink]="['/admin']">Activity of users</a></li>
     <li><a (click)="logOut()">Log out</a></li>
-    <li style="float:right"><a class="active" href="#about">About</a></li>
+    <li style="float:right"><a class="active" [routerLink]="['/about']">About</a></li>
 </ul>
 
 <ng-template #loggedOutTemplate>
     <ul>
         <li><a *ngIf="!authService.isLoggedIn" [routerLink]="['/login']">Log in</a></li>
-        <li style="float:right"><a class="active" href="#about">About</a></li>
+        <li style="float:right"><a class="active" [routerLink]="['/about']">About</a></li>
     </ul>
 </ng-template>

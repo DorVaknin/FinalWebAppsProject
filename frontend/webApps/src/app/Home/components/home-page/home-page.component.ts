@@ -11,29 +11,39 @@ import { ItemInterface } from 'src/app/Shared/types.interface';
 export class HomePageComponent implements OnInit {
 
   textualSearch = '';
-  currentPage = 1;
   items : ItemInterface[];
   displayLodaer = false;
   onTextChangedDebounced = debounce(this.onTextChanged, 500);
-  newItems = [];
+  currentPage = 1;
+  itemsPerPage = 12;
+  itemOnCurrentPage = [];
 
   constructor(private backendCommunicatorService: BackendCommunicatorService) {}
 
-  ngOnInit() {
-    this.onTextChanged();
+  async ngOnInit() {
+    this.displayLodaer = true;
+    await this.setItems();
+    this.itemOnCurrentPage = this.items.slice(0, this.itemsPerPage);
+    this.displayLodaer = false;
   }
 
-  onPageChanged(event) {
-    // const currentItems = (event.page - 1) * 12;
-    // this.newItems = this.items.slice(currentItems, currentItems + 12);
+  onPageChanged(page) {
+    const beggining = Math.min((page - 1) * this.itemsPerPage, this.items.length);
+    const end = Math.min(beggining + 12, this.items.length)
+    this.itemOnCurrentPage = this.items.slice(beggining, end);
+    console.log(this.itemOnCurrentPage);
+    
   }
 
   async onTextChanged() {
     this.displayLodaer = true;
+    await this.setItems();
+    this.onPageChanged(1);
+    this.displayLodaer = false;    
+  }
+
+  async setItems (){
     this.items = <ItemInterface[]>await this.backendCommunicatorService.getItemsBySearch(this.textualSearch);
-    this.displayLodaer = false;
-    console.log(this.items);
-    
   }
 
 }

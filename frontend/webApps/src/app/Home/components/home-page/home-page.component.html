@@ -11,7 +11,7 @@
   <div class="items">
     <app-item 
     class="item"
-    *ngFor="let item of items"
+    *ngFor="let item of itemOnCurrentPage"
     [name]= "item.name"
     [desc] = "item.desc"
     [productType] = "item.productType"
@@ -24,9 +24,9 @@
   <pagination
   class="pagination"
   [totalItems]="items?.length"
-  [itemsPerPage]="12"
+  [itemsPerPage]="itemsPerPage"
   [(ngModel)]="currentPage"
-  (pageChanged)="onPageChanged($event)"
+  (pageChanged)="onPageChanged($event.page)"
   [maxSize]="5"
   ></pagination>
 </div>

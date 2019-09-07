@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'home', canActivate: [AuthGuardService] ,component: HomePageComponent},
   {path: 'about', component: AboutPageComponent},
-  {path: 'cart', loadChildren: () => import('./Cart/cart.module').then(m => m.CartModule)},
+  {path: 'cart', canActivate: [AuthGuardService], loadChildren: () => import('./Cart/cart.module').then(m => m.CartModule)},
   {path: 'admin', canActivate: [AdminGuardService], loadChildren: () => import('./Admin-screen/admin-module.module').then(m => m.AdminModuleModule)},
   {path: '**', redirectTo: 'home'}
 ];

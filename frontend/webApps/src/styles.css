@@ -6,6 +6,7 @@ body {
   background-image: url('https://venngage-wordpress.s3.amazonaws.com/uploads/2018/09/Simple-Background-Images-10.png');
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .flex {

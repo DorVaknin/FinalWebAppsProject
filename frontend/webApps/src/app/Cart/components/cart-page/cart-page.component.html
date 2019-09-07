@@ -1,5 +1,6 @@
 <div class="container flex">
     <app-item *ngFor="let item of cartItems | keyvalue"
+    class="biscuit-card-cart"
     [name]='item.value.name'
     [desc]='item.value.desc'
     [productType]='item.value.productType'

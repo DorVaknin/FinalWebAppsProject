@@ -2,9 +2,25 @@
     position: static;
     text-align: center;
     width: 300px;
-    margin: 50px 0px;
+    height: 450px;
 }
 
 .buttons-template{
     margin: 30px 80px;
+}
+
+.biscuit-img {
+    min-height: 200px;
+    max-height: 200px;
+}
+
+.item-info {
+    width: 100%;
+}
+
+p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
 }

@@ -1,7 +1,15 @@
-.card {
-  margin-top: 5%;
-}
-
 .flex {
   justify-content: space-evenly;
+}
+
+.biscuit-card-cart {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.biscuit-card {
+  position: static;
+  text-align: center;
+  width: 100px;
+  height: 200px;
 }

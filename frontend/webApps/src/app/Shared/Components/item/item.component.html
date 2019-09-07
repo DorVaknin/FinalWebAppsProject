@@ -1,11 +1,13 @@
 <div class="card biscuit-card">
-    <img class="card-img-top img-responsive" [src]="pictureURL" alt="Card image">
-    <div class="card-body">
+    <img class="card-img-top img-responsive biscuit-img" [src]="pictureURL" alt="Card image">
+    <div class="card-body flex">
         <h6 class="card-subtitle mb-2 text-muted">Pet type : {{animalType}} | Category : {{productType}}</h6>
-        <p class="card-title">{{name}}</p>
-        <p class="card-description"> {{ desc }} </p>
-        <p class="card-footer">Price : {{price}}</p>
-        <a *ngIf="!isInCart else inCartTemplate" (click)="addToCart()" class="btn btn-primary">Add to cart</a>
+        <div class="item-info">
+            <p class="card-title">{{name}}</p>
+            <p class="card-description"> {{desc}} </p>
+            <p class="card-footer" >Price : {{price}}</p>
+            <a *ngIf="!isInCart else inCartTemplate" (click)="addToCart()" class="btn btn-primary">Add to cart</a>
+        </div>
     </div>
 </div>
 

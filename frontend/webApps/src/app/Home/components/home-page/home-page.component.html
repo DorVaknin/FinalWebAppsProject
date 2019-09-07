@@ -7,28 +7,31 @@
     <div *ngIf="displayLodaer" class="biscuit-loader"></div>
   </div>
 </div>
-<div *ngIf="(itemOnCurrentPage.length || !dataLoaded) else emptyTemplate" class="container card">
-  <div class="items">
-    <app-item 
-    class="item"
-    *ngFor="let item of itemOnCurrentPage"
-    [name]= "item.name"
-    [desc] = "item.desc"
-    [productType] = "item.productType"
-    [pictureURL] = "item.pictureURL"
-    [price] = "item.price"
-    [animalType] = "item.animalType"
-    [isInCart]="false"
-    ></app-item>
+<div *ngIf="dataLoaded">
+  <div *ngIf="itemOnCurrentPage.length else emptyTemplate" class="container card">
+    <div class="items">
+      <app-item 
+      class="item"
+      *ngFor="let item of itemOnCurrentPage"
+      [name]= "item.name"
+      [desc] = "item.desc"
+      [productType] = "item.productType"
+      [pictureURL] = "item.pictureURL"
+      [price] = "item.price"
+      [animalType] = "item.animalType"
+      [isInCart]="false"
+      ></app-item>
+    </div>
+    <pagination
+    *ngIf="itemOnCurrentPage.length"
+    class="pagination"
+    [totalItems]="items?.length"
+    [itemsPerPage]="itemsPerPage"
+    [(ngModel)]="currentPage"
+    (pageChanged)="onPageChanged($event.page)"
+    [maxSize]="5"
+    ></pagination>
   </div>
-  <pagination
-  class="pagination"
-  [totalItems]="items?.length"
-  [itemsPerPage]="itemsPerPage"
-  [(ngModel)]="currentPage"
-  (pageChanged)="onPageChanged($event.page)"
-  [maxSize]="5"
-  ></pagination>
 </div>
 
 <ng-template #emptyTemplate>

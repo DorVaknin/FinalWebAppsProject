@@ -8,6 +8,8 @@ import { AuthModule } from './Auth/auth.module';
 import { HomeModule } from './Home/components/home.module';
 import { SharedModule } from './Shared/shared.module';
 import { AboutPageComponent } from './About/about-page/about-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { AboutPageComponent } from './About/about-page/about-page.component';
     AuthModule,
     HomeModule,
     SharedModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,4 +5,5 @@ export interface ItemInterface {
   pictureURL : string
   price : number
   animalType : string
+  amountInCart: number;
 }

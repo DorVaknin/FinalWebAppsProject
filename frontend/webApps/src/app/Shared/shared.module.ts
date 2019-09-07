@@ -15,7 +15,7 @@ const modules = [
   CommonModule,
   RouterModule,
   FormsModule,
-  HttpClientModule
+  HttpClientModule,
 ];
 
 

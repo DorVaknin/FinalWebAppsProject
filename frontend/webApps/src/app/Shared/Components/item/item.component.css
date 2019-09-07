@@ -1,3 +1,14 @@
+p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+a {
+    color: white !important;
+}  
+
 .biscuit-card {
     position: static;
     text-align: center;
@@ -18,9 +29,7 @@
     width: 100%;
 }
 
-p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 250px;
+.under-button{
+    position: absolute;
+    transform: translate(-100px, 40px);
 }

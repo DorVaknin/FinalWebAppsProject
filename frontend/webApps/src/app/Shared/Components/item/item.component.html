@@ -7,6 +7,7 @@
             <p class="card-description"> {{desc}} </p>
             <p class="card-footer" >Price : {{price}}</p>
             <a *ngIf="!isInCart else inCartTemplate" (click)="addToCart()" class="btn btn-primary">Add to cart</a>
+            <span *ngIf="notifyAdded && !isInCart" class="biscuit-alert under-button" [@fadeInOut]>Added to cart</span>
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@
     <div *ngIf="displayLodaer" class="biscuit-loader"></div>
   </div>
 </div>
-<div class="container card">
+<div *ngIf="(itemOnCurrentPage.length || !dataLoaded) else emptyTemplate" class="container card">
   <div class="items">
     <app-item 
     class="item"
@@ -30,3 +30,7 @@
   [maxSize]="5"
   ></pagination>
 </div>
+
+<ng-template #emptyTemplate>
+  <h3 class="no-results">No results found...</h3>
+</ng-template>

@@ -54,3 +54,10 @@ input {
   margin-left: 20px;
   left: 0%;
 }
+
+.no-results {
+  font-size: 60px;
+  font-style: bold;
+  text-align: center;
+  margin-top: 100px;
+}

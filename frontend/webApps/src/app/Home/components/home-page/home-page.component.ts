@@ -17,6 +17,7 @@ export class HomePageComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 12;
   itemOnCurrentPage = [];
+  dataLoaded = false;
 
   constructor(private backendCommunicatorService: BackendCommunicatorService) {}
 
@@ -25,6 +26,7 @@ export class HomePageComponent implements OnInit {
     await this.setItems();
     this.itemOnCurrentPage = this.items.slice(0, this.itemsPerPage);
     this.displayLodaer = false;
+    this.dataLoaded = true;
   }
 
   onPageChanged(page) {

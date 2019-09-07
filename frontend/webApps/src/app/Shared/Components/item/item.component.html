@@ -3,7 +3,7 @@
     <div class="card-body">
         <h6 class="card-subtitle mb-2 text-muted">Pet type : {{animalType}} | Category : {{productType}}</h6>
         <p class="card-title">{{name}}</p>
-        <p class="card-description"> {{ description }} </p>
+        <p class="card-description"> {{ desc }} </p>
         <p class="card-footer">Price : {{price}}</p>
         <a *ngIf="!isInCart else inCartTemplate" (click)="addToCart()" class="btn btn-primary">Add to cart</a>
     </div>

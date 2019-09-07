@@ -42,6 +42,7 @@ router.delete("/cart/deleteAllItems", cartLogic.deleteAllItems);
 
 
 //store screen
+router.get("/store/search/", adminLogic.getAllItems);
 router.get("/store/search/:searchedText", storeLogic.search);
 router.post("/addpurchase/:item_id", storeLogic.addPurchase);
 

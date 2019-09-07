@@ -23,7 +23,8 @@ body {
 
 .biscuit-loader {
   position: relative;
-  left: 48%;
+  left: 49%;
+  margin-top: 10px;
   border: 6px solid #f3f3f3; /* Light grey */
   border-top: 6px solid #3498db; /* Blue */
   border-radius: 50%;

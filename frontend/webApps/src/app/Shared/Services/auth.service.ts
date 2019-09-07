@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {SERVER, HTTP_STATUS} from '../enums';
 
-const HTTP_OK = 200;
-const HTTP_UNAUTHORIZED = 401;
-const SERVER_URL = 'http://127.0.0.1:8080'
 @Injectable({
   providedIn: 'root'
 })
@@ -21,15 +19,15 @@ export class AuthService {
       Name: firstName,
       Lastname: lastname
     };
-    await this.http.post(`${SERVER_URL}/register`,body, { observe: 'response' }).toPromise().then(response => {
-      if (response.status === HTTP_OK) {
+    await this.http.post(`${SERVER.URL}/register`,body, { observe: 'response' }).toPromise().then(response => {
+      if (response.status === HTTP_STATUS.OK) {
         return true;
       }
       console.log(response);
       return false;;
     },
       error => {
-        console.log(error);
+        console.error(error);
         return false;
       });
 }
@@ -39,8 +37,8 @@ export class AuthService {
       ID: userId,
       Password: password
     };
-    await this.http.post(`${SERVER_URL}/login`,body,{ observe: 'response' }).toPromise().then(response => {
-        if (response.status === HTTP_OK) {
+    await this.http.post(`${SERVER.URL}/login`,body,{ observe: 'response' }).toPromise().then(response => {
+        if (response.status === HTTP_STATUS.OK) {
           this.isLoggedIn = true;
           if ((<any>response.body).isAdmin) {
             this.isAdmin = true;
@@ -48,7 +46,7 @@ export class AuthService {
         }
       },
         error => {
-          console.log(error);
+          console.error(error);
         });
   }
 

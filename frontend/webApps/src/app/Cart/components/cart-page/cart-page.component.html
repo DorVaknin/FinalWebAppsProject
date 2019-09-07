@@ -1,7 +1,7 @@
 <div class="container flex">
     <app-item *ngFor="let item of cartItems | keyvalue"
     [name]='item.value.name'
-    [description]='item.value.description'
+    [desc]='item.value.desc'
     [productType]='item.value.productType'
     [pictureURL]='item.value.pictureURL'
     [price]='item.value.price'

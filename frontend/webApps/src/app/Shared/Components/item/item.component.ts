@@ -9,7 +9,7 @@ import { CartService } from '../../Services/cart.service';
 })
 export class ItemComponent implements ItemInterface, OnInit {
   @Input() name = '';
-  @Input() description = '';
+  @Input() desc = '';
   @Input() productType = '';
   @Input() pictureURL = '';
   @Input() price = null;

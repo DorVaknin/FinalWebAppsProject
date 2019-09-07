@@ -2,17 +2,18 @@
   <img src="https://avada.theme-fusion.com/veterinarian/wp-content/uploads/sites/80/2016/11/pets_big.png">
   <h1>BISCUIT</h1>
   <h4 class="text-muted">GIVE YOUR PETS WHAT THEY DESERVE</h4>
-  <div class="md-form mt-0">
-    <input type="text" class="form-control" placeholder="Search..." aria-label="Search" (input)="onTextChanged()" [(ngModel)]="textualSearch">
+  <div class="flex">
+    <input type="text" class="form-control" placeholder="Search..." aria-label="Search" (input)="onTextChangedDebounced()" [(ngModel)]="textualSearch">
+    <div *ngIf="displayLodaer" class="biscuit-loader"></div>
   </div>
 </div>
 <div class="container card">
   <div class="items">
     <app-item 
     class="item"
-    *ngFor="let item of newItems"
+    *ngFor="let item of items"
     [name]= "item.name"
-    [description] = "item.description"
+    [desc] = "item.desc"
     [productType] = "item.productType"
     [pictureURL] = "item.pictureURL"
     [price] = "item.price"
@@ -22,7 +23,7 @@
   </div>
   <pagination
   class="pagination"
-  [totalItems]="items.length"
+  [totalItems]="items?.length"
   [itemsPerPage]="12"
   [(ngModel)]="currentPage"
   (pageChanged)="onPageChanged($event)"

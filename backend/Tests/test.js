@@ -2,8 +2,11 @@ const fetch = require('node-fetch');
 
 
 const baseURL = `http://localhost:8080/`;
-const METHODS = config.METHODS;
-
+const METHODS = {
+    POST: 'POST',
+    PUT: 'PUT',
+    GET: 'GET',
+    DELETE: 'DELETE'}
 async function approachToServer(url, method){
     const result = await fetch(url, { method: method });    
     const resultStatus = result.status;
@@ -21,58 +24,67 @@ async function register(){
 async function login(){
     return await approachToServer(`${baseURL}login`, METHODS.POST);
 }
+
 //admin screen
-async function getallusers(uniqueString, num){
+async function getAllUsers(){
     return await approachToServer(`${baseURL}getallusers`, METHODS.GET);
 }
 
-async function getallitems(uniqueString, num){
-    return await approachToServer(`${baseURL}getallitems`, METHODS.GET);
+async function getAllItems(){
+    return await approachToServer(`${baseURL}admin/getallitems`, METHODS.GET);
 }
 
-async function additem(uniqueString, num){
-    return await approachToServer(`${baseURL}calc/${uniqueString}/multiply/${num}`, METHODS.PUT);
+async function addItem(){
+    return await approachToServer(`${baseURL}admin/additem{num}`, METHODS.POST);
 }
 
-async function deleteuser(uniqueString){
-    return await approachToServer(`${baseURL}calc/${uniqueString}/reset`, METHODS.POST);
+async function deleteUser(objectID){
+    return await approachToServer(`${baseURL}admin/deleteuser/${objectID}`, METHODS.DELETE);
 }
 
-async function filterbynameandlastname(uniqueString){
-    return await approachToServer(`${baseURL}calc/${uniqueString}/M`, METHODS.GET);
+async function filterByNameAndLastName(name,lastname){
+    return await approachToServer(`${baseURL}admin/bynameandlastname/${name}/${lastname}`, METHODS.GET);
 }
 
-async function filterbyobjectid(uniqueString){
-    return await approachToServer(`${baseURL}calc/${uniqueString}/del`, METHODS.DELETE);
+async function filterByObjectId(objectid){
+    return await approachToServer(`${baseURL}admin/filter/byobjectid/${objectid}`, METHODS.GET);
 }
 
 // cart + checkout screen
-async function getusercart(uniqueString){
-    return await approachToServer(`${baseURL}calc/${uniqueString}/del`, METHODS.DELETE);
+async function getUserCart(){
+    return await approachToServer(`${baseURL}cart/getusercart`, METHODS.GET);
 }
 
 
-async function additem(uniqueString){
-    return await approachToServer(`${baseURL}calc/${uniqueString}/del`, METHODS.DELETE);
+async function addItem(item_id){
+    return await approachToServer(`${baseURL}cart/additem/${item_id}`, METHODS.POST);
 }
 
 
-async function deleteitem(uniqueString){
-    return await approachToServer(`${baseURL}calc/${uniqueString}/del`, METHODS.DELETE);
+async function deleteItem(item_id){
+    return await approachToServer(`${baseURL}cart/deleteitem/${item_id}`, METHODS.DELETE);
+}
+
+
+async function deleteAllItems(){
+    return await approachToServer(`${baseURL}cart/deleteallitems`, METHODS.DELETE);
 }
 
 
 //store screen
-async function searchText(uniqueString){
-    return await approachToServer(`${baseURL}calc/${uniqueString}/del`, METHODS.DELETE);
+
+
+async function search(searchedText){
+    return await approachToServer(`${baseURL}store/search/${searchedText}`, METHODS.GET);
 }
 
-async function addpurchase(uniqueString){
-    return await approachToServer(`${baseURL}calc/${uniqueString}/del`, METHODS.DELETE);
+
+async function addpurchase(item_id){
+    return await approachToServer(`${baseURL}store/search/${item_id}`, METHODS.POST);
 }
 
-async function setstatusbyid(uniqueString){
-    return await approachToServer(`${baseURL}calc/${uniqueString}/del`, METHODS.DELETE);
+async function setstatusbyid(status){
+    return await approachToServer(`${baseURL}setstatusbyid/${status}`, METHODS.POST);
 }
 
 async function startTesting(){

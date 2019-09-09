@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.logAdmin();
   }
 
   async onLogin() {

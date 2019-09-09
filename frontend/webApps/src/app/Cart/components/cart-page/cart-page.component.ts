@@ -55,6 +55,10 @@ export class CartPageComponent implements OnInit, OnDestroy {
     return {totalPrice, totalItems};
   }
 
+  get cartHasItems(){
+    return Object.keys(this.cartItems).length;
+  }
+
   ngOnDestroy(){
     this.cartChanged.unsubscribe();
   }

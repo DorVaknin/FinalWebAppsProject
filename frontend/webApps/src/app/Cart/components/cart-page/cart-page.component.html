@@ -1,10 +1,6 @@
-<div class="container flex flex-cart-header">
-  <h4>Cart summary</h4>
-  <div><b>Total price:</b> {{cartData.totalPrice}} </div>
-  <div><b>Total items:</b> {{cartData.totalItems}} </div>
+<div class="card biscuit-info-card cart-header">
+  <h4>Your cart</h4>
 </div>
-
-
 <div class="container flex">
     <app-item *ngFor="let item of cartItems | keyvalue"
     class="biscuit-card-cart"
@@ -18,6 +14,8 @@
     (askIfDeleteItem)="openModal($event)"
     ></app-item>
 </div>
+<div *ngIf="cartHasItems" [routerLink]="['/checkout']" class="btn btn-primary btn-checkout">Checkout</div>
+
 
 <ng-template #modalTemplateRef let-modal>
   <div class="modal-header background-red">

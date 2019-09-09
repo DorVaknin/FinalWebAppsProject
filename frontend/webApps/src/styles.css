@@ -9,6 +9,10 @@ body {
   background-attachment: fixed;
 }
 
+h1,h2,h3,h4,h5,h6{
+  text-align: center;
+}
+
 .flex {
   display: flex;
   justify-content: space-between;
@@ -19,6 +23,18 @@ body {
   color: rgb(231, 52, 52);
   font-weight: bold;
   font-size: 15px;
+}
+
+.biscuit-success {
+  color: rgb(25, 124, 30);
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.biscuit-info-card {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGkwfK42bfpEV2Fy5QydoHnTArVRNfDnav2Gkm7QrAvPFe3AeoKQ');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .background-red{

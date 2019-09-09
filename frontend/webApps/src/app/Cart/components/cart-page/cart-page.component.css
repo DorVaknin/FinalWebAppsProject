@@ -2,9 +2,9 @@
   justify-content: space-evenly;
 }
 
-.flex-cart-header{
-  flex-direction: column;
-  align-items: center;
+.cart-header{
+  left: 25%;
+  width: 50%
 }
 
 .biscuit-card-cart {
@@ -18,3 +18,11 @@
   width: 100px;
   height: 200px;
 }
+
+.flex-last{
+  align-self: flex-end;
+}
+
+/* .btn-checkout {
+  
+} */

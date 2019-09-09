@@ -38,7 +38,6 @@ const getAllItems = (req, res) => {
   };
   
 addItem = (req, res) => {
-    // console.log(req)
     let item = new Item({
       name: req.body.name,
       desc: req.body.desc,

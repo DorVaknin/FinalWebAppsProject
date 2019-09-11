@@ -7,7 +7,7 @@ const METHODS = {
   DELETE: "DELETE"
 };
 async function approachToServer(url, options) {
-  return await fetch(url, options);
+  return await fetch(url, options);//
 }
 
 module.exports = {

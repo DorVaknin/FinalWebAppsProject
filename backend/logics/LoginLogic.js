@@ -9,16 +9,12 @@ const login = (req, res) => {
   const rememberMe = req.body.rememberMe;
   verifyLogin(ID, Password)
     .then(user => {
-      console.log("I'm in loginLogic");
       const expiryDate = rememberMe ? 2^31 : 1000 * 60 * 5; // 5 Min or remembers if rememberme is true.
       res.cookie("authToken", user._id, { maxAge: expiryDate });
       router.use(authMiddleware);
-      console.log(res);
       return res.status(200).send({message: "User logged in succesfully", isAdmin: user.ID === 'admin'}); //sends cookie automatically
     })
     .catch((err) => {
-      console.log("Failed loginlogic");
-      console.log(err);
       return res.status(401).send("The user is unauthorized");
     });
 };

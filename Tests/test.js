@@ -3,7 +3,6 @@ const serverApproach = require('./serverApproach');
 const METHODS =  serverApproach.METHODS;
 const approachToServer = serverApproach.approachToServer;
 const baseURL = serverApproach.baseURL;
-console.log(aux)
 //register screen
 async function register(data) {
     const options = {
@@ -12,13 +11,23 @@ async function register(data) {
           "Content-Type": "application/json",
           "Content-Length": data.length
         },
-        body: data}
+        body: data
+      }
       
   return await approachToServer(`${baseURL}register`, options );
 }
 //login screen
-async function login() {
-  return await approachToServer(`${baseURL}login`, METHODS.POST);
+async function login(data) {
+  const options = {
+    method : METHODS.POST,
+    headers: {
+      "Content-Type": "application/json",
+      "Content-Length": data.length
+    },
+    body: data
+  }
+
+  return await approachToServer(`${baseURL}login`, options);
 }
 
 //admin screen
@@ -103,21 +112,62 @@ async function setstatusbyid(status) {
     METHODS.POST
   );
 }
+async function registerTesting(){
+ //register success
+ const userRegisterSuccess = JSON.stringify({
+  ID: "test",
+  Password: "qwerty"
+});
 
-async function startTesting() {
+const registerSuccessResult = await register(userRegisterSuccess);
+console.log("Testing Register Success");
+console.log("----------------------------------------");
+console.log("status code should be 200 - " + (registerSuccessResult.status == 200));
+console.log("");
 
-  ///register test
-  const user = JSON.stringify({
-    ID: "test",
-    Password: "qwerty"
+  //register failure (registering without password, which is mandatory)
+  const userRegisterFailure = JSON.stringify({
+    Password: "test"
+  });
+  
+  const registerFailureResult = await register(userRegisterFailure);
+  console.log("Testing Register Failure");
+  console.log("----------------------------------------");
+  console.log("status code should be 401 - " + (registerFailureResult.status == 401));
+  console.log("");
+}
+
+
+async function loginTesting(){  
+    //login success
+  const userLoginSuccess = JSON.stringify({
+    ID: "admin",
+    Password: "admin"
   });
 
-  const registerSuccessResult = await register(user);
-  console.log(aux.isUserExistByUsername)
-  console.log("Testing Register Success");
+  const LoginSuccessResult = await login(userLoginSuccess);
+  console.log("Testing Login Success");
   console.log("----------------------------------------");
-  console.log("status code should be 200 - " + (registerSuccessResult.status == 200))
-  console.log("The user exists in DB? - " + aux.isUserExistByUsername(user.ID))
+  console.log("status code should be 200 - " + (LoginSuccessResult.status == 200));
+  console.log("");
+
+    //login failure
+  const userLoginFailure = JSON.stringify({
+    ID: "notExists",
+    Password: "notExists"
+  });
+  
+  const LoginFailureResult = await login(userLoginFailure);
+  console.log("Testing Login Failure");
+  console.log("----------------------------------------");
+  console.log("status code should be 401 - " + (LoginFailureResult.status == 401));
+  console.log("");
+}
+
+
+async function startTesting() {
+  await registerTesting();
+  await loginTesting();
 }
 
 startTesting();

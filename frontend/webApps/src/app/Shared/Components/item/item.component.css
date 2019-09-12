@@ -1,13 +1,12 @@
 p {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
     max-width: 250px;
 }
 
 a {
     color: white !important;
-}  
+}
 
 .biscuit-card {
     position: static;

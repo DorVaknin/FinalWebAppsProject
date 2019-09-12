@@ -1,5 +1,7 @@
 const Buyer = require("../models/Buyer");
 const encryptor = require("../encryption/encryptor");
+const router = require("express").Router();
+const authMiddleware = require("../middlewares/authMiddleware");
 
 const login = (req, res) => {
   const ID = req.body.ID;
@@ -9,6 +11,7 @@ const login = (req, res) => {
     .then(user => {
       const expiryDate = rememberMe ? 2^31 : 1000 * 60 * 5; // 5 Min or remembers if rememberme is true.
       res.cookie("authToken", user._id, { maxAge: expiryDate });
+      router.use(authMiddleware);
       return res.status(200).send({message: "User logged in succesfully", isAdmin: user.ID === 'admin'}); //sends cookie automatically
     })
     .catch(() => {

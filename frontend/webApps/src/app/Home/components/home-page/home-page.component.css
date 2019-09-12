@@ -16,7 +16,7 @@ img{
 input {
   margin-top: 20px;
   width: 20%;
-  margin-left: 40%; 
+  margin-left: 40%;
 }
 
 
@@ -52,12 +52,11 @@ input {
   align-self: flex-end;
   margin-bottom: 5px;
   margin-left: 20px;
-  left: 0%;
+  left: 0;
 }
 
 .no-results {
   font-size: 60px;
-  font-style: bold;
   text-align: center;
   margin-top: 100px;
 }

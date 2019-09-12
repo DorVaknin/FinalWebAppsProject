@@ -9,14 +9,12 @@ import { AuthService } from '../../../Shared/Services/auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  username = ''
-  firstName = ''
-  lastName = ''
-  email = '';
+  username = '';
+  firstName = '';
+  lastName = '';
   password = '';
   passwordConfirm = '';
   displayLodaer = false;
-
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -26,7 +24,7 @@ export class SignupComponent implements OnInit {
   async onSignUp() {
     this.displayLodaer = true;
     await this.authService.registerNewUser(this.username, this.firstName, this.lastName, this.password);
-    await this.authService.logIn(this.username, this.password)
+    await this.authService.logIn(this.username, this.password);
     this.router.navigate(['/home']);
 
   }

@@ -78,7 +78,8 @@ deleteUser = (req, res) => {
   filterByNameLastName = (req, res) => {
     name = req.params.name;
     lastname = req.params.lastname;
-ז      .then(user => {
+    Buyer.findOne({ Name: name, LastName: lastname})
+      .then(user => {
         if (user === null) {
           return res.status(404).send("User does not exists in the database");
         } else {
@@ -90,11 +91,22 @@ deleteUser = (req, res) => {
       });
   }; 
 
+  deleteAllUsers = (req, res) => {
+    Buyer.deleteMany({})
+      .then(() => {
+        return res.status(200).send("The user deleted successfully");
+      })
+      .catch(err => {
+        return res.status(404).send("Request Failed" + err);
+      });
+  };
+
 module.exports = {
     getAllUser: getAllUser,
     filterUserByObjectId : filterUserByObjectId,
     getAllItems: getAllItems,
     addItem: addItem,
     deleteUser : deleteUser,
-    filterByNameLastName: filterByNameLastName
+    filterByNameLastName: filterByNameLastName,
+    deleteAllUsers: deleteAllUsers
 }

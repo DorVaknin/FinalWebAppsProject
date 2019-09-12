@@ -24,7 +24,7 @@ Buyer.findOne({ _id: userObjectID })
   .then(user => {
     if (user == null) {//does not exists in database
       return false;
-    } else {
+    } else {//
       return true;
     }
   }) 

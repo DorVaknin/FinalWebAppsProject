@@ -1,4 +1,5 @@
 const aux = require('./auxiliaryFunctions');
+const axios = require('axios');
 const serverApproach = require('./serverApproach');
 const METHODS =  serverApproach.METHODS;
 const approachToServer = serverApproach.approachToServer;
@@ -31,30 +32,25 @@ async function login(data) {
   return await approachToServer(options);
 }
 
-//admin screen
-async function getAllUsers() {
-  return await approachToServer(`${baseURL}getallusers`, METHODS.GET);
-}
-
-async function getAllItems() {
-  return await approachToServer(`${baseURL}admin/getallitems`, METHODS.GET);
-}
-
 async function addItem(item_id) {
-  options = {
-    method: METHODS.POST,
-    url: `${baseURL}/cart/additem/${item_id}`,
-    headers: {
-    'Accept': 'application/json', // This is set on request
-    'Content-Type': 'application/json', // This is set on request
-    'X-CSRF-Token': 'abcdefghijklmnop', // This is set on request
-    'Cache': 'no-cache', // This is set on request
-    'Cookie': 'csrftoken=abcdefghijklmnop',
-     'withCredentials':'true'
-    } // This is missing from request,
-  }
+  // axios.defaults.withCredentials = true
+  // options = {
+  //   method: METHODS.POST,
+  //   url: `${baseURL}/cart/additem/${item_id}`,
+  //   headers: {
+  //   'Cookie': 'authToken=5d7a658e1e2b6e338c4d38af'
+  //   }
+  // }
+  cookie_value = 'authToken=5d7a658e1e2b6e338c4d38af'
   
-  return await approachToServer(`${baseURL}cart/additem/${item_id}`, options);
+  return await axios.post(`${baseURL}/cart/additem/${item_id}`, {
+    method: METHODS.POST,
+    headers: {Authorization: `Bearer ${cookie_value}`}
+  })
+  .then(function(response) {
+  })
+  .catch(function(error) {
+  });
 }
 
 async function deleteUser(objectID) {
@@ -185,7 +181,7 @@ async function loginTesting(){
 
 async function addItemTesting(){
 
-  const addItemSuccessResult = await addItem("5d331390e643734c84006f7e");
+  const addItemSuccessResult = await addItem("5d722c7231ff9452c0e38aac");
   console.log(await addItemSuccessResult.status);
   console.log("Testing AddItem Success");
   console.log("----------------------------------------");

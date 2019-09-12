@@ -21,7 +21,6 @@ router.post("/register", registerLogic);
 router.post("/login", loginLogic);
 
 // middlewares (only for backend usage)
-router.use(authMiddleware);
 router.use(addUserFieldMiddleware);
 
 // admin screen

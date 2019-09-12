@@ -9,6 +9,7 @@ import {ItemInterface} from "../../../Shared/types.interface";
 })
 export class CheckoutPageComponent implements OnInit {
   constructor(private cartService: CartService) { }
+  paymentDone = false;
 
   ngOnInit() {
   }

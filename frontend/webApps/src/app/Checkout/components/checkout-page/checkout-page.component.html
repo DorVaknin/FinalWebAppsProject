@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="!paymentDone else thankYouTemplate" class="row">
   <div class="col-75">
     <div class="container">
       <form action="/action_page.php">
@@ -59,7 +59,7 @@
         <label>
           <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
         </label>
-        <input type="submit" value="Submit payment" class="btn">
+        <input (click)="paymentDone = true" value="Submit payment" class="btn btn-primary">
       </form>
     </div>
   </div>
@@ -77,7 +77,14 @@
         <span class="price">{{item.value.price}} $</span>
       </p>
       <hr>
-      <p>Total <span class="price" style="color:black"><b>{{totals.totalPrice}} $</b></span></p>
+      <p>Total price <span class="price" style="color:black"><b>{{totals.totalPrice}} $</b></span></p>
     </div>
   </div>
 </div>
+
+<ng-template #thankYouTemplate>
+  <app-thank-you></app-thank-you>
+  <div class="flex flex-center">
+    <img src="https://1.bp.blogspot.com/-tFd5LzyV76o/WKyXIoG6lYI/AAAAAAABuk0/CdDZb_1pZHsKUOxwV7GzLrAeNQI_9P_qACLcB/s1600/09-funny-gif-243-dog-loves-head-massage.gif">
+  </div>
+</ng-template>

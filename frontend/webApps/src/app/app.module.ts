@@ -11,7 +11,6 @@ import { HomeModule } from './Home/components/home.module';
 import { SharedModule } from './Shared/shared.module';
 import { AboutPageComponent } from './About/about-page/about-page.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

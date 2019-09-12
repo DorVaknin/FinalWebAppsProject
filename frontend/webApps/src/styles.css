@@ -19,6 +19,10 @@ h1,h2,h3,h4,h5,h6{
   flex-wrap: wrap;
 }
 
+.flex-center {
+  justify-content: center;
+}
+
 .biscuit-alert {
   color: rgb(231, 52, 52);
   font-weight: bold;

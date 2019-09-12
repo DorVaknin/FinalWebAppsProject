@@ -14,7 +14,7 @@ const login = (req, res) => {
       router.use(authMiddleware);
       return res.status(200).send({message: "User logged in succesfully", isAdmin: user.ID === 'admin'}); //sends cookie automatically
     })
-    .catch(() => {
+    .catch((err) => {
       return res.status(401).send("The user is unauthorized");
     });
 };

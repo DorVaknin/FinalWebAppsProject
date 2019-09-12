@@ -5,7 +5,6 @@ const storeLogic = require("../logics/storeLogic");
 const adminLogic = require("../logics/AdminLogic");
 const registerLogic = require("../logics/RegisterLogic");
 const cartLogic = require("../logics/CartLogic");
-const authMiddleware = require("../middlewares/authMiddleware");
 const addUserFieldMiddleware = require("../middlewares/addUserFieldMiddleware");
 
 router.use(function (req, res, next) {
@@ -24,7 +23,6 @@ router.post("/login", loginLogic);
 // middlewares (only for backend usage)
 router.use(authMiddleware);
 router.use(addUserFieldMiddleware);
-
 
 // admin screen
 router.get("/admin/getallusers", adminLogic.getAllUser);

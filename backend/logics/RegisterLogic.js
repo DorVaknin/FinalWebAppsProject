@@ -7,6 +7,7 @@ const register = (req, res) => {
     Password: encryptor(req.body.Password.trim()),
     Name: req.body.Name,
     LastName: req.body.LastName,
+    Email: req.body.Email,
     Cart: []
   });
   buyer

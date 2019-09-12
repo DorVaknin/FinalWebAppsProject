@@ -13,12 +13,13 @@ export class AuthService {
   isLoggedIn = false;
   isAdmin = false;
 
-  async registerNewUser(userName, firstName, lastname, password){
+  async registerNewUser(userName, firstName, lastname, email, password){
     const body = {
       ID: userName,
       Password: password,
       Name: firstName,
-      Lastname: lastname
+      Lastname: lastname,
+      Email: email
     };
     await this.http.post(`${SERVER.URL}/register`,body, { observe: 'response' }).toPromise().then(response => {
       if (response.status === HTTP_STATUS.OK) {
@@ -35,10 +36,11 @@ export class AuthService {
       });
 }
 
-  async logIn(userId, password) {
+  async logIn(userId, password, rememberMe) {
     const body = {
       ID: userId,
-      Password: password
+      Password: password,
+      rememberMe
     };
     await this.http.post(`${SERVER.URL}/login`,body,{ observe: 'response', withCredentials: true }).toPromise().then(response => {
       console.log(response);

@@ -28,6 +28,10 @@ export class AdminPageComponent implements OnInit {
         field: 'Name'
       },
       {
+        headerName: 'Email',
+        field: 'Email'
+      },
+      {
         headerName: '# items in cart',
         valueGetter : (params) => get(params, 'data.Cart.length')
       },

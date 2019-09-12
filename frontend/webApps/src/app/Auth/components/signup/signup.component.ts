@@ -14,6 +14,7 @@ export class SignupComponent implements OnInit {
   lastName = '';
   password = '';
   passwordConfirm = '';
+  email = '';
   displayLodaer = false;
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -23,8 +24,8 @@ export class SignupComponent implements OnInit {
 
   async onSignUp() {
     this.displayLodaer = true;
-    await this.authService.registerNewUser(this.username, this.firstName, this.lastName, this.password);
-    await this.authService.logIn(this.username, this.password);
+    await this.authService.registerNewUser(this.username, this.firstName, this.lastName, this.email,  this.password);
+    await this.authService.logIn(this.username, this.password, false);
     this.router.navigate(['/home']);
 
   }

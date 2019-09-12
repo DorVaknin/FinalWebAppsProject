@@ -74,7 +74,7 @@
       </h4>
       <p *ngFor="let item of cartService.items | keyvalue">
         <span><b>{{item.value.name | shortenText:20}} <span style="margin-left: 30px;">X {{cartService.getAmountOfItem(item.value.name)}}</span></b></span>
-        <span class="price">{{item.value.price}} $</span>
+        <span class="price">{{cartService.getAmountOfItem(item.value.name) * item.value.price}} $</span>
       </p>
       <hr>
       <p>Total price <span class="price" style="color:black"><b>{{totals.totalPrice}} $</b></span></p>

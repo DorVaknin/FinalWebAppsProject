@@ -1,7 +1,7 @@
 const Buyer = require("../models/Buyer");
 const encryptor = require("../encryption/encryptor");
-const authMiddleware = require("../middlewares/authMiddleware");
 const router = require("express").Router();
+const authMiddleware = require("../middlewares/authMiddleware");
 
 const login = (req, res) => {
   const ID = req.body.ID;

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {SERVER, HTTP_STATUS} from '../enums';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) { }
   isLoggedIn = false;
   isAdmin = false;
 
@@ -21,10 +22,12 @@ export class AuthService {
     };
     await this.http.post(`${SERVER.URL}/register`,body, { observe: 'response' }).toPromise().then(response => {
       if (response.status === HTTP_STATUS.OK) {
+        const cookie = this.cookieService.get('authToken');
+        this.cookieService.set('authToken', cookie);
         return true;
       }
       console.log(response);
-      return false;;
+      return false;
     },
       error => {
         console.error(error);
@@ -37,8 +40,11 @@ export class AuthService {
       ID: userId,
       Password: password
     };
-    await this.http.post(`${SERVER.URL}/login`,body,{ observe: 'response' }).toPromise().then(response => {
+    await this.http.post(`${SERVER.URL}/login`,body,{ observe: 'response', withCredentials: true }).toPromise().then(response => {
+      console.log(response);
         if (response.status === HTTP_STATUS.OK) {
+          const cookie = this.cookieService.get('authToken');
+          this.cookieService.set('authToken', cookie);
           this.isLoggedIn = true;
           if ((<any>response.body).isAdmin) {
             this.isAdmin = true;

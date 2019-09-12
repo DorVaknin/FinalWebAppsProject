@@ -18,10 +18,10 @@ export class ItemComponent implements ItemInterface, OnInit {
   @Input() pictureURL = '';
   @Input() price = null;
   @Input() animalType = '';
-  @Input() isInCart = false
+  @Input() isInCart = false;
 
   @Output() askIfDeleteItem: EventEmitter<ItemInterface> = new EventEmitter();
-  
+
   amountInCart = 0;
   notifyAdded = false;
 
@@ -39,7 +39,7 @@ export class ItemComponent implements ItemInterface, OnInit {
       this.notifyAdded = false;
     }, 500);
   }
-  
+
   deduct(){
     if (this.amountInCart === 1){
       this.askIfDeleteItem.emit(this);
@@ -47,10 +47,6 @@ export class ItemComponent implements ItemInterface, OnInit {
       this.cartService.deduceOne(this);
       this.amountInCart = this.cartService.getAmountOfItem(this.name);
     }
-  }
-  
-  showCart(){
-    console.log(this.cartService.items);
   }
 
 }

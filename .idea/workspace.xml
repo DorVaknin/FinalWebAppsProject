@@ -1,35 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac439e5c-69fb-4be4-97ec-735c19e12882" name="Default Changelist" comment="Didn't do anything yet, first change">
-      <change afterPath="$PROJECT_DIR$/github-project-inspiring/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/github-project-inspiring/.idea/github-project-inspiring.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/github-project-inspiring/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/github-project-inspiring/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/github-project-inspiring/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/github-project-inspiring/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ac439e5c-69fb-4be4-97ec-735c19e12882" name="Default Changelist" comment="tons of changes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/logics/LoginLogic.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/logics/LoginLogic.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/middlewares/authMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middlewares/authMiddleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Admin-screen/components/admin-page/admin-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Admin-screen/components/admin-page/admin-page.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Admin-screen/components/admin-page/admin-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Admin-screen/components/admin-page/admin-page.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Admin-screen/components/admin-page/admin-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Admin-screen/components/admin-page/admin-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Auth/components/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Auth/components/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Auth/components/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Auth/components/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Auth/components/signup/signup.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Auth/components/signup/signup.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Auth/components/signup/signup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Auth/components/signup/signup.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Cart/cart.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Cart/cart.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Cart/components/cart-page/cart-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Cart/components/cart-page/cart-page.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Cart/components/cart-page/cart-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Cart/components/cart-page/cart-page.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Cart/components/cart-page/cart-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Cart/components/cart-page/cart-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Home/components/home-page/home-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Home/components/home-page/home-page.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Components/item/item.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Components/item/item.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Components/item/item.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Components/item/item.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Components/item/item.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Components/item/item.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Services/backend-communicator.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Services/backend-communicator.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Services/cart.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/Services/cart.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/Shared/shared.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webApps/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webApps/src/styles.css" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/.tmp/" />
-    <ignored path="$PROJECT_DIR$/temp/" />
-    <ignored path="$PROJECT_DIR$/tmp/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/backend/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -41,58 +47,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/FinalWebAppsProject/src/app/app.component.js" />
-        <option value="$PROJECT_DIR$/FinalWebAppsProject/src/index.html" />
-        <option value="$PROJECT_DIR$/github-project-inspiring/backend/bin/www" />
-        <option value="$PROJECT_DIR$/backend/shnizels.js" />
-        <option value="$PROJECT_DIR$/backend/app.js" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-11" />
-    <option name="width" value="980" />
-    <option name="height" value="1044" />
-  </component>
+  <component name="ProjectId" id="1QjWYzyhxhnAAgu2VlgNvB7vFVx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="FinalWebAppsProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FinalWebAppsProject" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FinalWebAppsProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FinalWebAppsProject" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FinalWebAppsProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FinalWebAppsProject" type="462c0819:PsiDirectoryNode" />
-              <item name="github-project-inspiring" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FinalWebAppsProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FinalWebAppsProject" type="462c0819:PsiDirectoryNode" />
-              <item name="github-project-inspiring" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
@@ -100,7 +56,12 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Users\dor\Desktop\FinalWebAppsProject\FinalWebAppsProject\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/frontend/webApps/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/webApps/src/app/Checkout" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -129,127 +90,27 @@
       <workItem from="1562680368622" duration="1772000" />
       <workItem from="1562682271601" duration="3786000" />
       <workItem from="1562774415218" duration="6510000" />
+      <workItem from="1568284538264" duration="7386000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16639000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17170112" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32867134" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32867134" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="TypeScript" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32867134" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Didn't do anything yet, first change" />
-    <option name="LAST_COMMIT_MESSAGE" value="Didn't do anything yet, first change" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md" />
-    <entry file="file://$PROJECT_DIR$/FinalWebAppsProject/src/app/app.component.html" />
-    <entry file="file://$PROJECT_DIR$/FinalWebAppsProject/src/index.html" />
-    <entry file="file://$PROJECT_DIR$/FinalWebAppsProject/src/app/app.component.js" />
-    <entry file="file://$PROJECT_DIR$/backend/bin/www" />
-    <entry file="file://$PROJECT_DIR$/github-project-inspiring/backend/bin/www">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/github-project-inspiring/backend/routes/generate_uid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/github-project-inspiring/backend/routes/customer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="72" selection-start-line="72" selection-end-line="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/shnizels.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/github-project-inspiring/backend/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/github-project-inspiring/backend/models/model.customer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/github-project-inspiring/backend/package-lock.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/7zOCDC6B52C/express5-cookies.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/package.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/7zO4DAC5F83/app.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Google Drive/מדעי המחשב/שנה ג/Semester B/Mobile Web Apps/Lectures/ex-examples/express5-cookies.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/github-project-inspiring/backend/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="36" column="22" lean-forward="true" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <MESSAGE value="tons of changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="tons of changes" />
   </component>
 </project>

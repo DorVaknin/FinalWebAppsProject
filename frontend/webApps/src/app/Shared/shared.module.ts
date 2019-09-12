@@ -5,12 +5,16 @@ import {NavigationComponent} from './Components/navigation/navigation.component'
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {ShortenTextPipe} from "./Pipes/shorten-text.pipe";
 
 const components = [
   ItemComponent,
   NavigationComponent,
 ];
 
+const pipes = [
+  ShortenTextPipe
+];
 const modules = [
   CommonModule,
   RouterModule,
@@ -20,9 +24,9 @@ const modules = [
 
 
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, ...pipes],
   imports: [...modules],
-  exports: [...components, ...modules]
+  exports: [...components, ...modules, ...pipes]
 })
 export class SharedModule {
 }

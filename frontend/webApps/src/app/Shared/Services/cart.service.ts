@@ -13,7 +13,7 @@ export class CartService {
   addItem(item: ItemInterface) {
     if (!(item.name in this.itemsInCart)) {
       this.itemsInCart[item.name] = item;
-    } 
+    }
       this.itemsInCart[item.name].amountInCart = this.itemsInCart[item.name].amountInCart + 1;
   }
 
@@ -42,5 +42,12 @@ export class CartService {
 
   get items(){
     return this.itemsInCart;
+  }
+
+  totalPriceOfCart() {
+    let totalPrice = 0;
+    for (let item in this.itemsInCart){
+      totalPrice += item['price'];
+    }
   }
 }

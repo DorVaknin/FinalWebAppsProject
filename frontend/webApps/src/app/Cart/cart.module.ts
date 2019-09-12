@@ -9,7 +9,7 @@ import { SharedModule } from '../Shared/shared.module';
 @NgModule({
   declarations: [CartPageComponent],
   imports: [
-    CommonModule,
+  CommonModule,
     SharedModule,
     NgbModalModule,
     RouterModule.forChild([

@@ -3,7 +3,6 @@ import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 
 import { CartService } from '../../../Shared/Services/cart.service';
-import { ItemInterface } from 'src/app/Shared/types.interface';
 
 @Component({
   selector: 'app-cart-page',
@@ -14,9 +13,9 @@ export class CartPageComponent implements OnInit, OnDestroy {
   cartItems = {};
   cartChanged = new Subject();
   askIfDeleteItemName = '';
-  totalItems;
-  
-  @ViewChild('modalTemplateRef', {static: true} ) modalTemplateRef :NgbModalRef;
+
+  @ViewChild('askIfDeleteItemTemplate', {static: true} ) askIfDeleteItemTemplate :NgbModalRef;
+  @ViewChild('deleteCartTemplate', {static: true} ) deleteCartTemplate :NgbModalRef;
 
   constructor(private cartService: CartService, private modalService: NgbModal) { }
 
@@ -31,28 +30,18 @@ export class CartPageComponent implements OnInit, OnDestroy {
   }
 
   clearCart(){
-    this.cartService.clearCart();
-    this.cartChanged.next();
+    this.openModal(this.deleteCartTemplate).then(() => {
+      this.cartService.clearCart();
+      this.cartChanged.next();
+    });
   }
 
-  
-  openModal(item){
-    this.askIfDeleteItemName = item.name;
-    this.modalService.open(this.modalTemplateRef, {
+
+  openModal(modalTemplateRef :NgbModalRef){
+    return this.modalService.open(modalTemplateRef, {
       size: 'sm',
       centered: true
-    }).result.then(() => this.removeItem(item.name), () => {});
-  }
-  
-  get cartData(){
-    let totalPrice = 0;
-    let totalItems = 0;
-    for (let [_ ,item] of Object.entries(this.cartItems)) {
-      const currentItem = (<ItemInterface>item);
-      totalPrice +=  currentItem.price * currentItem.amountInCart;
-      totalItems += currentItem.amountInCart;
-    }
-    return {totalPrice, totalItems};
+    }).result;
   }
 
   get cartHasItems(){
@@ -61,5 +50,10 @@ export class CartPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.cartChanged.unsubscribe();
+  }
+
+  askIfSeleteItem(item){
+    this.askIfDeleteItemName = item.name;
+    this.openModal(this.askIfDeleteItemTemplate).then(() => this.removeItem(item.name), () => {});
   }
 }

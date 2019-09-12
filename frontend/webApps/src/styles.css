@@ -19,6 +19,10 @@ h1,h2,h3,h4,h5,h6{
   flex-wrap: wrap;
 }
 
+.flex-center {
+  justify-content: center;
+}
+
 .biscuit-alert {
   color: rgb(231, 52, 52);
   font-weight: bold;
@@ -35,6 +39,14 @@ h1,h2,h3,h4,h5,h6{
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGkwfK42bfpEV2Fy5QydoHnTArVRNfDnav2Gkm7QrAvPFe3AeoKQ');
   background-repeat: no-repeat;
   background-size: cover;
+  border: black solid 1px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  color: rebeccapurple;
+  z-index: -1;
 }
 
 .background-red{
@@ -52,6 +64,10 @@ h1,h2,h3,h4,h5,h6{
   width: 30px;
   height: 30px;
   animation: spin 2s linear infinite;
+}
+
+.text-align-center {
+  text-align: center;
 }
 
 @keyframes spin {

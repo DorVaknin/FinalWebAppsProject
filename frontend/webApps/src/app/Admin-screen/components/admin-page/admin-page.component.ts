@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GridApi } from 'ag-grid-community';
+import {get} from 'lodash';
+
+import {BackendCommunicatorService} from "../../../Shared/Services/backend-communicator.service";
 
 @Component({
   selector: 'app-admin-page',
@@ -10,19 +13,28 @@ export class AdminPageComponent implements OnInit {
   columnDefs;
   rowData;
   gridApi: GridApi;
-  constructor() { }
+
+  constructor(private backendCommunicatorService: BackendCommunicatorService) { }
 
   ngOnInit() {
+    this.backendCommunicatorService.getAllUsers().subscribe(data => this.rowData = data);
     this.columnDefs = [
-      { headerName: 'Make' , field: 'make' },
-      { headerName: 'Model', field: 'model' },
-      { headerName: 'Price', field: 'price' }
-    ];
-
-    this.rowData = [
-      { make: 'Toyota', model: 'Celica', price: 35000 },
-      { make: 'Ford', model: 'Mondeo', price: 32000 },
-      { make: 'Porsche', model: 'Boxter', price: 72000 }
+      {
+        headerName: 'User Name' ,
+        field: 'ID'
+      },
+      {
+        headerName: 'Name',
+        field: 'Name'
+      },
+      {
+        headerName: '# items in cart',
+        valueGetter : (params) => get(params, 'data.Cart.length')
+      },
+      {
+        headerName: '# items bought',
+        valueGetter : (params) => get(params, 'data.Purchases.length')
+      }
     ];
   }
 

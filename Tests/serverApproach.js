@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const axios = require('axios');
 const baseURL = `http://localhost:8080/`;
 const METHODS = {
   POST: "POST",
@@ -6,10 +6,10 @@ const METHODS = {
   GET: "GET",
   DELETE: "DELETE"
 };
-async function approachToServer(url, options) {
-  return await fetch(url, options);//
-}
 
+async function approachToServer(options) {
+    return await axios(options);
+}
 module.exports = {
   baseURL: baseURL,
   METHODS: METHODS,

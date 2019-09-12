@@ -5,7 +5,7 @@ const Item = require("../models/Item");
 const addItemToBuyer = (userObjectID, itemObjectID) => {
   return Buyer.findOneAndUpdate(
     { _id: mongoose.Types.ObjectId(userObjectID) },
-    { $push: { Cart: mcngoose.Types.ObjectId(itemObjectID) } }
+    { $push: { Cart: mongoose.Types.ObjectId(itemObjectID) } }
   );
 };
 

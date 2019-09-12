@@ -78,8 +78,7 @@ deleteUser = (req, res) => {
   filterByNameLastName = (req, res) => {
     name = req.params.name;
     lastname = req.params.lastname;
-    Buyer.findOne({ Name: name, LastName: lastname})
-      .then(user => {
+ז      .then(user => {
         if (user === null) {
           return res.status(404).send("User does not exists in the database");
         } else {

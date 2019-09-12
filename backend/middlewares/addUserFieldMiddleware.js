@@ -1,5 +1,7 @@
 const Buyer = require('../models/Buyer');
 const getUserMiddleware =  (req,res,next) => {
+    console.log(req)
+    console.log("---------------------------------------------------")
     const authToken = req.cookies.authToken;
     getUserByObjectID(authToken).then(user => {
         req.user = user;

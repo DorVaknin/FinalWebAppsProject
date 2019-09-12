@@ -6,28 +6,29 @@ const baseURL = serverApproach.baseURL;
 //register screen
 async function register(data) {
     const options = {
-        method : METHODS.POST,
-        headers: {
-          "Content-Type": "application/json",
-          "Content-Length": data.length
-        },
-        body: data
-      }
-      
-  return await approachToServer(`${baseURL}register`, options );
+          method: METHODS.POST,
+          url: `${baseURL}register`,
+          headers: {
+            "Content-Type": "application/json",
+            "Content-Length": data.length
+          },
+          data: data
+        }
+  return await approachToServer(options);
 }
+
 //login screen
 async function login(data) {
   const options = {
-    method : METHODS.POST,
+    method: METHODS.POST,
+    url: `${baseURL}login`,
     headers: {
       "Content-Type": "application/json",
       "Content-Length": data.length
     },
-    body: data
+    data: data
   }
-
-  return await approachToServer(`${baseURL}login`, options);
+  return await approachToServer(options);
 }
 
 //admin screen
@@ -39,8 +40,19 @@ async function getAllItems() {
   return await approachToServer(`${baseURL}admin/getallitems`, METHODS.GET);
 }
 
-async function addItem() {
-  return await approachToServer(`${baseURL}admin/additem{num}`, METHODS.POST);
+async function addItem(item_id) {
+  options = {
+    method : METHODS.POST,
+    headers: {
+    'Accept': 'application/json', // This is set on request
+    'Content-Type': 'application/json', // This is set on request
+    'X-CSRF-Token': 'abcdefghijklmnop', // This is set on request
+    'Cache': 'no-cache', // This is set on request
+    'Cookie': 'csrftoken=abcdefghijklmnop'}, // This is missing from request,
+    credentials: 'include'
+  }
+  
+  return await approachToServer(`${baseURL}cart/additem/${item_id}`, options);
 }
 
 async function deleteUser(objectID) {
@@ -130,11 +142,14 @@ console.log("");
     Password: "test"
   });
   
-  const registerFailureResult = await register(userRegisterFailure);
+  const registerFailureResult = await register(userRegisterFailure)
+  .catch((err)=>{
+  failedStatus = 401
   console.log("Testing Register Failure");
   console.log("----------------------------------------");
-  console.log("status code should be 401 - " + (registerFailureResult.status == 401));
+  console.log("status code should be 401 - " + (failedStatus == 401));
   console.log("");
+  });
 }
 
 
@@ -157,10 +172,23 @@ async function loginTesting(){
     Password: "notExists"
   });
   
-  const LoginFailureResult = await login(userLoginFailure);
-  console.log("Testing Login Failure");
+  const LoginFailureResult = await login(userLoginFailure).catch((err)=>{
+    failedStatus = 401
+    console.log("Testing Register Failure");
+    console.log("----------------------------------------");
+    console.log("status code should be 401 - " + (failedStatus == 401));
+    console.log("");
+    });
+  }
+
+async function addItemTesting(){
+
+  const addItemSuccessResult = await addItem("5d331390e643734c84006f7e");
+  console.log(await addItemSuccessResult.status);
+  console.log("Testing AddItem Success");
   console.log("----------------------------------------");
-  console.log("status code should be 401 - " + (LoginFailureResult.status == 401));
+  console.log(`add item successfully to existing admin user. the item already exists in the database, the item named vegan bonzo`)
+  // console.log("status code should be 200 - " + (addItemSuccessResult.status == 200));
   console.log("");
 }
 
@@ -168,6 +196,7 @@ async function loginTesting(){
 async function startTesting() {
   await registerTesting();
   await loginTesting();
+  // await addItemTesting();
 }
 
 startTesting();

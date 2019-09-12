@@ -15,6 +15,8 @@ const login = (req, res) => {
       return res.status(200).send({message: "User logged in succesfully", isAdmin: user.ID === 'admin'}); //sends cookie automatically
     })
     .catch((err) => {
+      console.log("HELLLOOO2")
+
       return res.status(401).send("The user is unauthorized");
     });
 };

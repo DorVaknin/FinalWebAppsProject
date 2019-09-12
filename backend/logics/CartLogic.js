@@ -19,7 +19,7 @@ const deleteItemFromBuyer = (userObjectID, itemObjectID) => {
 isItemExists = itemObjectID => Item.findOne({ _id: itemObjectID });
 
 const addItem = (req, res) => {
-  const userObjectID = req.user._id;
+  const userObjectID = req.cookies.authToken;
   const itemObjectID = req.params.item_id;
 
   isItemExists(itemObjectID)
@@ -44,7 +44,7 @@ const addItem = (req, res) => {
 };
 
 const deleteItem = (req, res) => {
-  const userObjectID = req.user._id;
+  const userObjectID = req.cookies.authToken;
   const itemObjectID = req.params.item_id;
   Buyer.findOne({
     _id: userObjectID,
@@ -71,7 +71,7 @@ const deleteItem = (req, res) => {
 };
 
 const deleteAllItems = (req, res) => {
-  const userObjectID = req.user._id;
+  const userObjectID = req.cookies.authToken;
   Buyer.find({ _id: userObjectID })
     .then(user => {
       if (user.length === 0) {
@@ -98,7 +98,7 @@ const deleteAllItems = (req, res) => {
 
 const getUserCart = (req, res) => {
   return new Promise((resolve, reject) => {
-    Buyer.findOne({ _id: req.user._id })
+    Buyer.findOne({ _id: req.cookies.authToken })
       .then(user => {
         if (user == null) {
           reject("The user does not exists");

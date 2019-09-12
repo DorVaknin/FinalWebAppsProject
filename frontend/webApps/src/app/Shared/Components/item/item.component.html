@@ -5,7 +5,7 @@
         <div class="item-info">
             <p class="card-title">{{name | shortenText:25}}</p>
             <p class="card-description"> {{desc | shortenText:25}} </p>
-            <p class="card-footer" >Price : {{price}}</p>
+            <p class="card-footer" >Price : {{price}} $</p>
             <a *ngIf="!isInCart else inCartTemplate" (click)="addToCart()" class="btn btn-primary">Add to cart</a>
             <span *ngIf="notifyAdded && !isInCart" class="biscuit-success under-button" [@fadeInOut]>Added to cart !</span>
         </div>

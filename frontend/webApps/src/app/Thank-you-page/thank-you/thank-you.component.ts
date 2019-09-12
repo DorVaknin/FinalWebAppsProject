@@ -19,8 +19,8 @@ export class ThankYouComponent implements OnInit {
       setTimeout(() => {
         this.router.navigate(['/home']);
         this.cartService.clearCart();
-      }, 1500);
-    }, 2000);
+      }, 2500);
+    }, 5000);
   }
 
 }

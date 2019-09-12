@@ -15,10 +15,11 @@
       <button type="submit" class="btn btn-success" [disabled]="!form.form.valid">Log in</button>
       <button type="button" class="btn btn-info" (click)="switchToSignUp()">Sign up</button>
     </div>
+        <span>
+          <label for="remember">Rememeber me</label>
+          <input [checked]="rememberMe" class="rememberMe" type="checkbox" id="remember">
+        </span>
   </form>
 </div>
 
-  <!-- <span>
-    <label for="remember">Rememeber me</label>
-    <input type="checkbox" id="remember">
-  </span> -->
+

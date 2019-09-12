@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   password = '';
   displayErrorLoginMessage = false;
   displayLoader = false;
+  rememberMe = false;
 
   constructor(private router: Router, private http: HttpClient, private authService: AuthService) {
   }
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   async onLogin() {
     this.displayErrorLoginMessage = false;
     this.displayLoader = true;
-    await this.authService.logIn(this.name, this.password);
+    await this.authService.logIn(this.name, this.password, this.rememberMe);
     if (this.authService.isLoggedIn) {
       this.router.navigate(['/home']);
     } else {

@@ -42,14 +42,16 @@ async function getAllItems() {
 
 async function addItem(item_id) {
   options = {
-    method : METHODS.POST,
+    method: METHODS.POST,
+    url: `${baseURL}/cart/additem/${item_id}`,
     headers: {
     'Accept': 'application/json', // This is set on request
     'Content-Type': 'application/json', // This is set on request
     'X-CSRF-Token': 'abcdefghijklmnop', // This is set on request
     'Cache': 'no-cache', // This is set on request
-    'Cookie': 'csrftoken=abcdefghijklmnop'}, // This is missing from request,
-    credentials: 'include'
+    'Cookie': 'csrftoken=abcdefghijklmnop',
+     'withCredentials':'true'
+    } // This is missing from request,
   }
   
   return await approachToServer(`${baseURL}cart/additem/${item_id}`, options);
@@ -194,9 +196,9 @@ async function addItemTesting(){
 
 
 async function startTesting() {
-  await registerTesting();
-  await loginTesting();
-  // await addItemTesting();
+  // await registerTesting();
+  // await loginTesting();
+  await addItemTesting();
 }
 
 startTesting();

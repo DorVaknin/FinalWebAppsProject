@@ -2,10 +2,10 @@ const Buyer = require("../models/Buyer");
 const mongoose = require("mongoose");
 const Item = require("../models/Item");
 
-const addItemToBuyer = (userObjectID, itemObjectID) => {
+const addItemToBuyer = (userObjectID, item) => {
   return Buyer.findOneAndUpdate(
     { _id: mongoose.Types.ObjectId(userObjectID) },
-    { $push: { Cart: mongoose.Types.ObjectId(itemObjectID) } }
+    { $push: { Cart: item } }
   );
 };
 
@@ -27,7 +27,7 @@ const addItem = (req, res) => {
       if (item == null) {
         return res.status(404).send("Item does not exists in the database");
       } else {
-        addItemToBuyer(userObjectID, itemObjectID)
+        addItemToBuyer(userObjectID, item)
           .then(() => {
             return res
               .status(200)

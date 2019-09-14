@@ -1,25 +1,30 @@
-<div *ngIf="cartHasItems else epmtyCart" class="card biscuit-info-card cart-header">
-  <h4>Your cart</h4>
-</div>
-<div class="container">
-  <div class="flex">
-    <app-item *ngFor="let item of cartItems | keyvalue"
-              class="biscuit-card-cart text-align-center"
-              [name]='item.value.name'
-              [desc]='item.value.desc'
-              [productType]='item.value.productType'
-              [pictureURL]='item.value.pictureURL'
-              [price]='item.value.price'
-              [animalType]='item.value.animalType'
-              [isInCart]="true"
-              (askIfDeleteItem)="askIfSeleteItem($event)"
-    ></app-item>
+<div *ngIf="displayLoader else cartTemplate" class="biscuit-loader"></div>
+
+<ng-template #cartTemplate>
+  <div *ngIf="cartHasItems else epmtyCart" class="card biscuit-info-card cart-header">
+    <h4>Your cart</h4>
   </div>
-  <div *ngIf="cartHasItems" class="flex buttons">
-    <button [routerLink]="['/checkout']" class="btn btn-primary btn-checkout">Proceed to checkout</button>
-    <button class="btn btn-danger" (click)="clearCart()">Clear cart</button>
+  <div class="container">
+    <div class="flex">
+      <app-item *ngFor="let item of cartItems | keyvalue"
+                class="biscuit-card-cart text-align-center"
+                [_id]='item.value._id'
+                [name]='item.value.name'
+                [desc]='item.value.desc'
+                [productType]='item.value.productType'
+                [pictureURL]='item.value.pictureURL'
+                [price]='item.value.price'
+                [animalType]='item.value.animalType'
+                [isInCart]="true"
+                (askIfDeleteItem)="askIfSeleteItem($event)"
+      ></app-item>
+    </div>
+    <div *ngIf="cartHasItems" class="flex buttons">
+      <button [routerLink]="['/checkout']" class="btn btn-primary btn-checkout">Proceed to checkout</button>
+      <button class="btn btn-danger" (click)="clearCart()">Clear cart</button>
+    </div>
   </div>
-</div>
+</ng-template>
 
 
 <ng-template #askIfDeleteItemTemplate let-modal>

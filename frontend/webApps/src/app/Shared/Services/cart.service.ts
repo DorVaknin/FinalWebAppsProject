@@ -1,53 +1,50 @@
 import { Injectable } from '@angular/core';
 import { get } from 'lodash';
 import { ItemInterface } from '../types.interface';
+import { HttpClient } from '@angular/common/http';
+import { SERVER, HTTP_STATUS } from '../enums';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private itemsInCart = {};
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  addItem(item: ItemInterface) {
-    if (!(item.name in this.itemsInCart)) {
-      this.itemsInCart[item.name] = item;
-    }
-      this.itemsInCart[item.name].amountInCart = this.itemsInCart[item.name].amountInCart + 1;
+  addItem(itemId: string) {
+    return this.http.post(`${SERVER.URL}/cart/additem/${itemId}`, {}, { observe: 'response' });
   }
 
-  deduceOne(item: ItemInterface) {
-    if (item.name in this.itemsInCart) {
-      this.itemsInCart[item.name].amountInCart = this.itemsInCart[item.name].amountInCart - 1;
-      if (!this.itemsInCart[item.name].amountInCart) {
-        this.deleteItem(item.name);
-      }
-    }
-  }
-
-  deleteItem(itemID: string){
-    if (itemID in this.itemsInCart) {
-      delete this.itemsInCart[itemID];
-    }
+  deleteItem(itemID: string) {
+    return this.http.delete(`${SERVER.URL}/cart/deleteItem/${itemID}`, { observe: 'response' });
   }
 
   clearCart() {
-    this.itemsInCart = {};
+    return this.http.delete(`${SERVER.URL}/cart/deleteAllItems`, { observe: 'response' });
+  }
+  
+  removeDuplicates(cart) {
+    const nonRepeatedCartItems = [];
+    cart.forEach(cartItem => {
+      if (nonRepeatedCartItems.findIndex(item => item._id === cartItem._id) < 0) {
+        nonRepeatedCartItems.push(cartItem);
+      }
+    });
+    return nonRepeatedCartItems;
   }
 
-  getAmountOfItem(itemID: string){
-    return get(this.itemsInCart, `[${itemID}].amountInCart`) || 0;
+  getUserCart() {
+    return this.http.get(`${SERVER.URL}/cart/getusercart`);
   }
 
-  get items(){
-    return this.itemsInCart;
-  }
+  // get items(){
+  //   return this.itemsInCart;
+  // }
 
-  totalPriceOfCart() {
-    let totalPrice = 0;
-    for (let item in this.itemsInCart){
-      totalPrice += item['price'];
-    }
-  }
+  // totalPriceOfCart() {
+  //   let totalPrice = 0;
+  //   for (let item in this.itemsInCart){
+  //     totalPrice += item['price'];
+  //   }
+  // }
 }

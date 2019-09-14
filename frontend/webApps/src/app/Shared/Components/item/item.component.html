@@ -13,9 +13,9 @@
 </div>
 
 <ng-template #inCartTemplate>
-    <div class="buttons-template flex">
-        <button (click)="addToCart()">+</button>
-        <span>{{amountInCart}}</span>
-        <button (click)="deduct()">-</button>
+    <div class="flex">
+        <button class="btn btn-info btn-sm" (click)="addToCart()">Add another</button>
+        <div>{{amountInCart}}</div>
+        <button class="btn btn-info btn-sm" (click)="askIfDeleteItem.emit(this)">Remove from cart</button>
     </div>
 </ng-template>

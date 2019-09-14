@@ -1,59 +1,67 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from 'rxjs';
 
 import { CartService } from '../../../Shared/Services/cart.service';
+import { HTTP_STATUS } from 'src/app/Shared/enums';
 
 @Component({
   selector: 'app-cart-page',
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.css']
 })
-export class CartPageComponent implements OnInit, OnDestroy {
-  cartItems = {};
-  cartChanged = new Subject();
+export class CartPageComponent implements OnInit {
+  cartItems = [];
   askIfDeleteItemName = '';
+  displayLoader = false;
 
-  @ViewChild('askIfDeleteItemTemplate', {static: true} ) askIfDeleteItemTemplate :NgbModalRef;
-  @ViewChild('deleteCartTemplate', {static: true} ) deleteCartTemplate :NgbModalRef;
+  @ViewChild('askIfDeleteItemTemplate', { static: true }) askIfDeleteItemTemplate: NgbModalRef;
+  @ViewChild('deleteCartTemplate', { static: true }) deleteCartTemplate: NgbModalRef;
 
   constructor(private cartService: CartService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.cartItems = this.cartService.items;
-    this.cartChanged.subscribe(() => this.cartItems = this.cartService.items);
+    this.fetchCart();
   }
 
-  removeItem(itemId){
-    this.cartService.deleteItem(itemId);
-    this.cartChanged.next();
-  }
-
-  clearCart(){
-    this.openModal(this.deleteCartTemplate).then(() => {
-      this.cartService.clearCart();
-      this.cartChanged.next();
+  removeItem(itemId) {
+    this.cartService.deleteItem(itemId).subscribe(response => {
+      if (response.status === HTTP_STATUS.OK) {
+        console.log('item removed');
+        this.fetchCart();
+      }
     });
   }
 
+  clearCart() {
+    this.openModal(this.deleteCartTemplate).then(() => {
+      this.cartService.clearCart().subscribe(response => {
+        this.fetchCart();
+      });;
+    });
+  }
 
-  openModal(modalTemplateRef :NgbModalRef){
+  openModal(modalTemplateRef: NgbModalRef) {
     return this.modalService.open(modalTemplateRef, {
       size: 'sm',
       centered: true
     }).result;
   }
 
-  get cartHasItems(){
-    return Object.keys(this.cartItems).length;
-  }
-
-  ngOnDestroy(){
-    this.cartChanged.unsubscribe();
-  }
-
-  askIfSeleteItem(item){
+  askIfSeleteItem(item) {
     this.askIfDeleteItemName = item.name;
-    this.openModal(this.askIfDeleteItemTemplate).then(() => this.removeItem(item.name), () => {});
+    this.openModal(this.askIfDeleteItemTemplate).then(() => this.removeItem(item._id), () => { });
+  }
+
+  fetchCart() {
+    this.displayLoader = true;
+    this.cartService.getUserCart().subscribe(cart => {
+      this.cartItems = cart as Array<any>;
+      this.cartItems = this.cartService.removeDuplicates(this.cartItems);
+      this.displayLoader = false;
+    });
+  }
+
+  get cartHasItems() {
+    return Object.keys(this.cartItems).length;
   }
 }

@@ -9,10 +9,11 @@ const addItemToBuyer = (userObjectID, item) => {
   );
 };
 
-const deleteItemFromBuyer = (userObjectID, itemObjectID) => {
+
+const deleteItemFromBuyer = (userObjectID, item) => {
   return Buyer.findOneAndUpdate(
     { _id: mongoose.Types.ObjectId(userObjectID) },
-    { $pull: { Cart: mongoose.Types.ObjectId(itemObjectID) } }
+    { $pull: { Cart: item } }
   );
 };
 
@@ -48,13 +49,14 @@ const deleteItem = (req, res) => {
   const itemObjectID = req.params.item_id;
   Buyer.findOne({
     _id: userObjectID,
-    Cart: mongoose.Types.ObjectId(itemObjectID)
+    Cart:  { $elemMatch: { _id:mongoose.Types.ObjectId(itemObjectID) } } 
   })
-    .then(item => {
-      if (item == null) {
+    .then(user => {
+      if (user == null) {
         return res.status(404).send("Item does not exists in the users cart");
       } else {
-        deleteItemFromBuyer(userObjectID, itemObjectID)
+        item_object = user.Cart.find(item=>item._id==itemObjectID);
+        deleteItemFromBuyer(userObjectID, item_object)
           .then(() => {
             return res
               .status(200)

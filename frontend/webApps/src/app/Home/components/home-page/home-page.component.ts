@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { debounce } from 'lodash';
 import { BackendCommunicatorService } from '../../../Shared/Services/backend-communicator.service';
 import { ItemInterface } from 'src/app/Shared/types.interface';
+import { HttpClient } from '@angular/common/http';
+import { SERVER } from 'src/app/Shared/enums';
 
 @Component({
   selector: 'app-home-page',
@@ -19,9 +21,10 @@ export class HomePageComponent implements OnInit {
   itemOnCurrentPage = [];
   dataLoaded = false;
 
-  constructor(private backendCommunicatorService: BackendCommunicatorService) {}
+  constructor(private backendCommunicatorService: BackendCommunicatorService, private http: HttpClient) {}
 
   async ngOnInit() {
+    this.http.post(`${SERVER.URL}/setstatusbyid/home`, {}).subscribe();
     this.displayLodaer = true;
     await this.setItems();
     this.itemOnCurrentPage = this.items.slice(0, this.itemsPerPage);

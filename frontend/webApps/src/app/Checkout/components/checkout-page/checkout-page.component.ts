@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../../Shared/Services/cart.service';
 import { ItemInterface } from "../../../Shared/types.interface";
+import { HttpClient } from '@angular/common/http';
+import { SERVER } from 'src/app/Shared/enums';
 
 @Component({
   selector: 'app-checkout-page',
@@ -8,7 +10,7 @@ import { ItemInterface } from "../../../Shared/types.interface";
   styleUrls: ['./checkout-page.component.css']
 })
 export class CheckoutPageComponent implements OnInit {
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private http: HttpClient) { }
   paymentDone = false;
   totalPrice = 0;
   totalItems = 0;
@@ -16,6 +18,7 @@ export class CheckoutPageComponent implements OnInit {
   cartItemsObject = {};
 
   ngOnInit() {
+    this.http.post(`${SERVER.URL}/setstatusbyid/checkout`, {}).subscribe();
     this.cartService.getUserCart().subscribe(cart => {
       this.cartItems = (cart as Array<ItemInterface>);
       this.setInfo();

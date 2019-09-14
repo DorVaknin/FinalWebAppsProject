@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CartService } from '../../../Shared/Services/cart.service';
-import { HTTP_STATUS } from 'src/app/Shared/enums';
+import { HTTP_STATUS, SERVER } from 'src/app/Shared/enums';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart-page',
@@ -17,9 +18,10 @@ export class CartPageComponent implements OnInit {
   @ViewChild('askIfDeleteItemTemplate', { static: true }) askIfDeleteItemTemplate: NgbModalRef;
   @ViewChild('deleteCartTemplate', { static: true }) deleteCartTemplate: NgbModalRef;
 
-  constructor(private cartService: CartService, private modalService: NgbModal) { }
+  constructor(private cartService: CartService, private modalService: NgbModal, private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.post(`${SERVER.URL}/setstatusbyid/cart`, {}).subscribe();
     this.fetchCart();
   }
 

@@ -3,6 +3,8 @@ import { GridApi } from 'ag-grid-community';
 import {get} from 'lodash';
 
 import {BackendCommunicatorService} from "../../../Shared/Services/backend-communicator.service";
+import { HttpClient } from '@angular/common/http';
+import { SERVER } from 'src/app/Shared/enums';
 
 @Component({
   selector: 'app-admin-page',
@@ -14,9 +16,10 @@ export class AdminPageComponent implements OnInit {
   rowData;
   gridApi: GridApi;
 
-  constructor(private backendCommunicatorService: BackendCommunicatorService) { }
+  constructor(private backendCommunicatorService: BackendCommunicatorService, private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.post(`${SERVER.URL}/setstatusbyid/admin`, {}).subscribe();
     this.backendCommunicatorService.getAllUsers().subscribe(data => this.rowData = data);
     this.columnDefs = [
       {
@@ -38,6 +41,10 @@ export class AdminPageComponent implements OnInit {
       {
         headerName: '# items bought',
         valueGetter : (params) => get(params, 'data.Purchases.length')
+      },
+      {
+        headerName: 'Current status',
+        valueGetter : (params) => get(params, 'data.Status') || 'Offline'
       }
     ];
   }

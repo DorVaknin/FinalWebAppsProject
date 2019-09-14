@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SERVER, HTTP_STATUS } from '../enums';
+import { SERVER } from '../enums';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +35,5 @@ export class CartService {
     });
     return nonRepeatedCartItems;
   }
-  
+
 }

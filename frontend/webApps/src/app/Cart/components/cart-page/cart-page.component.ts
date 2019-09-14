@@ -34,9 +34,7 @@ export class CartPageComponent implements OnInit {
 
   clearCart() {
     this.openModal(this.deleteCartTemplate).then(() => {
-      this.cartService.clearCart().subscribe(response => {
-        this.fetchCart();
-      });;
+      this.cartService.clearCart().subscribe(() => this.fetchCart());
     });
   }
 

@@ -28,7 +28,13 @@ a {
     width: 100%;
 }
 
-.under-button{
+.under-button-in-cart {
     position: absolute;
     transform: translate(-100px, 40px);
 }
+
+.under-button-not-in-cart {
+    position: absolute;
+    transform: translate(60px,35px);
+}
+

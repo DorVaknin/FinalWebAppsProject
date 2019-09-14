@@ -11,6 +11,7 @@ const addItemToBuyer = (userObjectID, item) => {
 
 
 const deleteItemFromBuyer = (userObjectID, item) => {
+  
   return Buyer.findOneAndUpdate(
     { _id: mongoose.Types.ObjectId(userObjectID) },
     { $pull: { Cart: item } }

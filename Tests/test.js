@@ -31,26 +31,24 @@ async function login(data) {
   }
   return await approachToServer(options);
 }
+async function setCookie(item_id){
+  options = {
+    method: METHODS.GET,
+    url: `${baseURL}cookie/${item_id}`
+  }
 
+  return await approachToServer(options)
+}
 async function addItem(item_id) {
-  // axios.defaults.withCredentials = true
-  // options = {
-  //   method: METHODS.POST,
-  //   url: `${baseURL}/cart/additem/${item_id}`,
-  //   headers: {
-  //   'Cookie': 'authToken=5d7a658e1e2b6e338c4d38af'
-  //   }
-  // }
-  cookie_value = 'authToken=5d7a658e1e2b6e338c4d38af'
-  
-  return await axios.post(`${baseURL}/cart/additem/${item_id}`, {
+  options = {
     method: METHODS.POST,
-    headers: {Authorization: `Bearer ${cookie_value}`}
-  })
-  .then(function(response) {
-  })
-  .catch(function(error) {
-  });
+    url: `${baseURL}cart/additem/${item_id}`,
+    headers: {
+    'Cookie': 'authToken=5d7a658e1e2b6e338c4d38af'
+    }
+  }
+  
+  return await approachToServer(options)
 }
 
 async function deleteUser(objectID) {
@@ -79,15 +77,9 @@ async function getUserCart() {
   return await approachToServer(`${baseURL}cart/getusercart`, METHODS.GET);
 }
 
-async function addItem(item_id) {
-  return await approachToServer(
-    `${baseURL}cart/additem/${item_id}`,
-    METHODS.POST
-  );
-}
 
 async function deleteItem(item_id) {
-  return await approachToServer(
+  return await approachToServer(//
     `${baseURL}cart/deleteitem/${item_id}`,
     METHODS.DELETE
   );
@@ -180,13 +172,16 @@ async function loginTesting(){
   }
 
 async function addItemTesting(){
-
-  const addItemSuccessResult = await addItem("5d722c7231ff9452c0e38aac");
-  console.log(await addItemSuccessResult.status);
+  // const adminData = JSON.stringify({
+  //   ID: "admin",
+  //   Password: "admin"
+  // });
+  const addItemSuccessResult = await addItem("5d7230f94c5c940bbc2f305d");
+  console.log(addItemSuccessResult)
   console.log("Testing AddItem Success");
   console.log("----------------------------------------");
   console.log(`add item successfully to existing admin user. the item already exists in the database, the item named vegan bonzo`)
-  // console.log("status code should be 200 - " + (addItemSuccessResult.status == 200));
+  console.log("status code should be 200 - " + (addItemSuccessResult.status == 200));
   console.log("");
 }
 

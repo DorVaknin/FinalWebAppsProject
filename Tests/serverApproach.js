@@ -8,7 +8,9 @@ const METHODS = {
 };
 
 async function approachToServer(options) {
-    return await axios(options);
+  // console.log(options)
+  result = await axios(options);
+  return result
 }
 module.exports = {
   baseURL: baseURL,

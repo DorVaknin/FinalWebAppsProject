@@ -87,10 +87,15 @@ async function getUserCart() {
 
 
 async function deleteItem(item_id) {
-  return await approachToServer(//
-    `${baseURL}cart/deleteitem/${item_id}`,
-    METHODS.DELETE
-  );
+  options = {
+    method: METHODS.DELETE,
+    url: `${baseURL}cart/deleteitem/${item_id}`,
+    headers: {
+    'Cookie': 'authToken=5d7a658e1e2b6e338c4d38af'
+    }
+  }
+  
+  return await approachToServer(options)
 }
 
 async function deleteAllItems() {
@@ -180,12 +185,8 @@ async function loginTesting(){
   }
 
 async function addItemTesting(){
-  // const adminData = JSON.stringify({
-  //   ID: "admin",
-  //   Password: "admin"
-  // });
   const addItemSuccessResult = await addItem("5d7230f94c5c940bbc2f305d");
-  console.log("Testing AddItem Success");
+  console.log("Testing AddItem");
   console.log("----------------------------------------");
   console.log(`adding an item to existing admin user, the item already exists in the database.`)
   console.log("status code should be for adding 200 - " + (addItemSuccessResult.status == 200));
@@ -198,11 +199,25 @@ async function addItemTesting(){
   console.log("");
 }
 
+async function deleteItemTesting(){
+  const deleteItemSuccessResult = await deleteItem("5d7230f94c5c940bbc2f305d");
+  console.log("Testing deleteItem");
+  console.log("----------------------------------------");
+  console.log(`deleting an item from existing user cart, the item already exists in the database.`)
+  console.log("status code should be for deleting 200 - " + (deleteItemSuccessResult.status == 200));
+  const userCart =  await getUserCart();
+  deletedItem = userCart.data.find(item=>item._id=="5d7230f94c5c940bbc2f305d");
+  if(deletedItem === undefined){
+    console.log("The item deleted from the user's cart successfully?" );
+    console.log(deletedItem === undefined);
+  }
+}
 
 async function startTesting() {
-  // await registerTesting();
-  // await loginTesting();
-  // await addItemTesting();
+  await registerTesting();
+  await loginTesting();
+  await addItemTesting();
+  await deleteItemTesting();
 }
 
 startTesting();

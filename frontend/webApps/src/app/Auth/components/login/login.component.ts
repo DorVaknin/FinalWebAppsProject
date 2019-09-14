@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../../../Shared/Services/auth.service';
+import { SERVER } from 'src/app/Shared/enums';
 
 @Component({
   selector: 'app-login-component',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.http.post(`${SERVER.URL}/setstatusbyid/login`, {}).subscribe();
     this.logAdmin();
   }
 

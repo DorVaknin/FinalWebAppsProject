@@ -4,6 +4,7 @@ import { trigger } from '@angular/animations';
 import { ItemInterface } from '../../types.interface';
 import { CartService } from '../../Services/cart.service';
 import { animations } from '../../animations';
+import { HTTP_STATUS } from '../../enums';
 
 @Component({
   selector: 'app-item',
@@ -12,6 +13,7 @@ import { animations } from '../../animations';
   animations: [trigger('fadeInOut', animations.fadeInOut)]
 })
 export class ItemComponent implements ItemInterface, OnInit {
+  @Input() _id = '';
   @Input() name = '';
   @Input() desc = '';
   @Input() productType = '';
@@ -28,25 +30,26 @@ export class ItemComponent implements ItemInterface, OnInit {
   constructor(private cartService: CartService) { }
 
   ngOnInit() {
-    this.amountInCart = this.cartService.getAmountOfItem(this.name) || 0;
+    this.getAmountInCart();
   }
 
-  addToCart(){
-    this.cartService.addItem(this);
-    this.amountInCart = this.cartService.getAmountOfItem(this.name);
-    this.notifyAdded = true;
-    setTimeout(() => {
-      this.notifyAdded = false;
-    }, 500);
+  addToCart() {
+    this.cartService.addItem(this._id).subscribe(response => {
+      this.notifyAdded = true;
+      if (response.status === HTTP_STATUS.OK) {
+        setTimeout(() => {
+          this.notifyAdded = false;
+        }, 500);
+      }
+      this.getAmountInCart();
+    });
   }
 
-  deduct(){
-    if (this.amountInCart === 1){
-      this.askIfDeleteItem.emit(this);
-    } else {
-      this.cartService.deduceOne(this);
-      this.amountInCart = this.cartService.getAmountOfItem(this.name);
-    }
+  getAmountInCart() {
+    this.cartService.getUserCart().subscribe(cartItems => {
+      this.amountInCart = 0;
+      (cartItems as Array<ItemInterface>).forEach(item => this.amountInCart = item._id === this._id ? this.amountInCart + 1 : this.amountInCart);
+    });;
   }
 
 }

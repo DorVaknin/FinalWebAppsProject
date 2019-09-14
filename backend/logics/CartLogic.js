@@ -33,7 +33,7 @@ const addItem = (req, res) => {
           .then(() => {
             return res
               .status(200)
-              .send("Added the item successfully to the user");
+              .send({message: "Added the item successfully to the user"});
           })
           .catch(err => {
             return res.status(404).send("Request Failed" + err);
@@ -61,7 +61,7 @@ const deleteItem = (req, res) => {
           .then(() => {
             return res
               .status(200)
-              .send("Deleted the item successfully from the user's cart");
+              .send({message: "Deleted the item successfully from the user's cart" });
           })
           .catch(err => {
             return res.status(404).send("Request Failed" + err);
@@ -87,7 +87,7 @@ const deleteAllItems = (req, res) => {
           .then(() => {
             return res
               .status(200)
-              .send("Deleted all items from the array");
+              .send({message: "Deleted all items from the array"});
           })
           .catch(err => {
             return res.status(404).send("Request Failed" + err);

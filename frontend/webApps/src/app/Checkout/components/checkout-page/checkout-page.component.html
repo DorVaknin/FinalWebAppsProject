@@ -69,15 +69,15 @@
       <h4>Total Items:
         <span class="price" style="color:black">
           <i class="fa fa-shopping-cart"></i>
-          <b>{{totals.totalItems}}</b>
+          <b>{{totalItems}}</b>
         </span>
       </h4>
-      <p *ngFor="let item of cartService.items | keyvalue">
-        <span><b>{{item.value.name | shortenText:20}} <span style="margin-left: 30px;">X {{cartService.getAmountOfItem(item.value.name)}}</span></b></span>
-        <span class="price">{{cartService.getAmountOfItem(item.value.name) * item.value.price}} $</span>
+      <p *ngFor="let item of cartItemsObject | keyvalue">
+        <span><b>{{item.value.name | shortenText:20}} <span style="margin-left: 30px;">X {{item.value.amount}}</span></b></span>
+        <span class="price">{{item.value.amount * item.value.price}} $</span>
       </p>
       <hr>
-      <p>Total price <span class="price" style="color:black"><b>{{totals.totalPrice}} $</b></span></p>
+      <p>Total price <span class="price" style="color:black"><b>{{totalPrice}} $</b></span></p>
     </div>
   </div>
 </div>

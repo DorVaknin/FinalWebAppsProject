@@ -13,6 +13,7 @@
       <app-item 
       class="item"
       *ngFor="let item of itemOnCurrentPage"
+      [_id]='item._id'
       [name]= "item.name"
       [desc] = "item.desc"
       [productType] = "item.productType"

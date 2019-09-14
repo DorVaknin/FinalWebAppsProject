@@ -5,6 +5,8 @@ const serverApproach = require('./serverApproach');
 const METHODS =  serverApproach.METHODS;
 const approachToServer = serverApproach.approachToServer;
 const baseURL = serverApproach.baseURL;
+const ADMIN_ID = "5d7d50c8ab09874e08df228d";
+
 //register screen
 async function register(data) {
     const options = {
@@ -45,7 +47,7 @@ async function addItem(item_id) {
     method: METHODS.POST,
     url: `${baseURL}cart/additem/${item_id}`,
     headers: {
-    'Cookie': 'authToken=5d7a658e1e2b6e338c4d38af'
+    'Cookie': `authToken=${ADMIN_ID}`
     }
   }
   
@@ -67,10 +69,14 @@ async function filterByNameAndLastName(name, lastname) {
 }
 
 async function filterByObjectId(objectid) {
-  return await approachToServer(
-    `${baseURL}admin/filter/byobjectid/${objectid}`,
-    METHODS.GET
-  );
+  options = {
+    method: METHODS.GET,
+    url:  `${baseURL}admin/filter/byobjectid/${objectid}`,
+    headers: {
+      'Cookie': `authToken=${ADMIN_ID}`
+    }
+  }
+  return await approachToServer(options);
 }
 
 // cart + checkout screen
@@ -79,7 +85,7 @@ async function getUserCart() {
     method: METHODS.GET,
     url: `${baseURL}cart/getusercart`,
     headers: {
-    'Cookie': 'authToken=5d7a658e1e2b6e338c4d38af'
+    'Cookie': `authToken=${ADMIN_ID}`
     }
   }
   return await approachToServer(options);
@@ -91,7 +97,7 @@ async function deleteItem(item_id) {
     method: METHODS.DELETE,
     url: `${baseURL}cart/deleteitem/${item_id}`,
     headers: {
-    'Cookie': 'authToken=5d7a658e1e2b6e338c4d38af'
+    'Cookie': `authToken=${ADMIN_ID}`
     }
   }
   
@@ -122,22 +128,27 @@ async function addpurchase(item_id) {
 }
 
 async function setstatusbyid(status) {
-  return await approachToServer(
-    `${baseURL}setstatusbyid/${status}`,
-    METHODS.POST
-  );
+  options = {
+    method: METHODS.POST,
+    url:   `${baseURL}setstatusbyid/${status}`,//
+    headers: {
+      'Cookie': `authToken=${ADMIN_ID}`
+    }
+  }
+  return await approachToServer(options);
 }
 async function registerTesting(){
  //register success
  const userRegisterSuccess = JSON.stringify({
   ID: "test",
-  Password: "qwerty"
+  Password: "qwerty",
+  Email: "shnizels@gmail.com"
 });
-
 const registerSuccessResult = await register(userRegisterSuccess);
 console.log("Testing Register Success");
 console.log("----------------------------------------");
-console.log("status code should be 200 - " + (registerSuccessResult.status == 200));
+console.log("status code is 200? " );
+console.log(registerSuccessResult.status == 200);
 console.log("");
 
   //register failure (registering without password, which is mandatory)
@@ -150,7 +161,8 @@ console.log("");
   failedStatus = 401
   console.log("Testing Register Failure");
   console.log("----------------------------------------");
-  console.log("status code should be 401 - " + (failedStatus == 401));
+  console.log("status code is 401?");
+  console.log(failedStatus == 401);
   console.log("");
   });
 }
@@ -160,13 +172,13 @@ async function loginTesting(){
     //login success
   const userLoginSuccess = JSON.stringify({
     ID: "admin",
-    Password: "admin"
+    Password: "admin"//
   });
-
   const LoginSuccessResult = await login(userLoginSuccess);
   console.log("Testing Login Success");
   console.log("----------------------------------------");
-  console.log("status code should be 200 - " + (LoginSuccessResult.status == 200));
+  console.log("status code is 200?")
+  console.log(LoginSuccessResult.status == 200);
   console.log("");
 
     //login failure
@@ -177,9 +189,10 @@ async function loginTesting(){
   
   const LoginFailureResult = await login(userLoginFailure).catch((err)=>{
     failedStatus = 401
-    console.log("Testing Register Failure");
+    console.log("Testing Login Failure");
     console.log("----------------------------------------");
-    console.log("status code should be 401 - " + (failedStatus == 401));
+    console.log("status code is 401?")
+    console.log(failedStatus == 401);
     console.log("");
     });
   }
@@ -188,8 +201,8 @@ async function addItemTesting(){
   const addItemSuccessResult = await addItem("5d7230f94c5c940bbc2f305d");
   console.log("Testing AddItem");
   console.log("----------------------------------------");
-  console.log(`adding an item to existing admin user, the item already exists in the database.`)
-  console.log("status code should be for adding 200 - " + (addItemSuccessResult.status == 200));
+  console.log(`adding an existing item to existing admin user, status code is 200?`)
+  console.log(addItemSuccessResult.status == 200);
   const userCart =  await getUserCart();
   addedItem = userCart.data.find(item=>item._id=="5d7230f94c5c940bbc2f305d");
   if(addedItem !== undefined){
@@ -203,8 +216,8 @@ async function deleteItemTesting(){
   const deleteItemSuccessResult = await deleteItem("5d7230f94c5c940bbc2f305d");
   console.log("Testing deleteItem");
   console.log("----------------------------------------");
-  console.log(`deleting an item from existing user cart, the item already exists in the database.`)
-  console.log("status code should be for deleting 200 - " + (deleteItemSuccessResult.status == 200));
+  console.log(`deleting an existing item from existing user cart, status code is 200?`)
+  console.log((deleteItemSuccessResult.status == 200));
   const userCart =  await getUserCart();
   deletedItem = userCart.data.find(item=>item._id=="5d7230f94c5c940bbc2f305d");
   if(deletedItem === undefined){
@@ -213,11 +226,27 @@ async function deleteItemTesting(){
   }
 }
 
+async function setStatusTesting(){
+  const setStatusSuccessResult = await setstatusbyid("admin");
+  console.log("Testing setstatusbyid");
+  console.log("----------------------------------------");
+  console.log(`setting a status to existing admin user, status code is 200?`)
+  console.log((setStatusSuccessResult.status == 200));
+  const user =  await filterByObjectId(ADMIN_ID);
+  adminStatus = user.data.Status;
+  if(adminStatus === "admin"){
+    console.log("\nThe status changed successfully in the admin's status field at mongoDB?" );
+    console.log(adminStatus == adminStatus);
+  }
+  console.log("");
+}
+
 async function startTesting() {
   await registerTesting();
   await loginTesting();
   await addItemTesting();
   await deleteItemTesting();
-}
+  // await setStatusTesting();
+}//
 
 startTesting();

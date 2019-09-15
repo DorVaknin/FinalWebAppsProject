@@ -25,7 +25,6 @@ const addItem = (req, res) => {
   const itemObjectID = req.params.item_id;
   isItemExists(itemObjectID)
     .then(item => {
-      console.log(item)
       if (item == null) {
         return res.status(404).send("Item does not exists in the database");
       } else {

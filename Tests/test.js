@@ -246,7 +246,7 @@ async function startTesting() {
   await loginTesting();
   await addItemTesting();
   await deleteItemTesting();
-  // await setStatusTesting();
-}//
+  await setStatusTesting();
+  }
 
 startTesting();

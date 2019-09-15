@@ -1,11 +1,8 @@
 const Buyer = require('../models/Buyer');
 const mongoose = require ('mongoose');
 const getUserMiddleware =  (req,res,next) => {
-    console.log(req.cookies);
     const authToken = req.cookies.authToken;
-    console.log(typeof(authToken))
     getUserByObjectID(authToken).then(user => {
-        console.log(user)
         req.user = user;
         next();
     })

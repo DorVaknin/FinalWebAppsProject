@@ -30,7 +30,7 @@ router.get("/admin/getallitems", adminLogic.getAllItems);
 router.post("/admin/additem", adminLogic.addItem);
 router.delete("/admin/deleteuser/:objectid", adminLogic.deleteUser);
 router.delete("/admin/deleteAllUsers", adminLogic.deleteAllUsers);
-router.get("/admin/filter/bynameandlastname/:name/:lastname", adminLogic.filterByNameLastName);
+router.get("/admin/filter/byUserName/:userName", adminLogic.filterByNameLastName);
 router.get("/admin/filter/byobjectid/:objectid", adminLogic.filterUserByObjectId);
 
 

@@ -17,4 +17,8 @@ export class BackendCommunicatorService {
   getAllUsers() {
     return this.http.get(`${SERVER.URL}/admin/getallusers`);
   }
+
+  getSpecificUser(userName: string) {
+    return this.http.get(`${SERVER.URL}/admin/filter/byUserName/${userName}`)
+  }
 }

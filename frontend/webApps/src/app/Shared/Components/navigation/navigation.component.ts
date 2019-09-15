@@ -17,4 +17,8 @@ export class NavigationComponent implements OnInit {
     this.authService.logOut();
   }
 
+  get isLoggedIn() {
+    return window.localStorage.getItem('loggedIn') === 'true';
+  }
+
 }

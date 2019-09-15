@@ -1,5 +1,3 @@
-const aux = require('./auxiliaryFunctions');
-const axios = require('axios');
 const serverApproach = require('./serverApproach');
 
 const METHODS =  serverApproach.METHODS;
@@ -120,11 +118,15 @@ async function search(searchedText) {
   );
 }
 
-async function addpurchase(item_id) {
-  return await approachToServer(
-    `${baseURL}store/search/${item_id}`,
-    METHODS.POST
-  );
+async function addPurchase(item_id) {
+  options = {
+    method: METHODS.POST,
+    url: `${baseURL}addpurchase/${item_id}`,
+    headers: {
+    'Cookie': `authToken=${ADMIN_ID}`
+    }
+  }
+  return await approachToServer(options);
 }
 
 async function setstatusbyid(status) {
@@ -241,12 +243,29 @@ async function setStatusTesting(){
   console.log("");
 }
 
+async function addPurchaseTesting(){
+  const addPurchaseSuccessResult = await addPurchase("5d7230f94c5c940bbc2f305d");
+  console.log("Testing AddPurchase");
+  console.log("----------------------------------------");
+  console.log(`adding an existing item to existing admin user, status code is 200?`)
+  console.log(addPurchaseSuccessResult.status == 200);
+  const response=  await filterByObjectId(ADMIN_ID);
+  adminPurchasesCart = response.data.Purchases
+  addedPurchaseItem = adminPurchasesCart.find(item=>item=="5d7230f94c5c940bbc2f305d");
+  if(addedPurchaseItem !== undefined){
+    console.log("The item appears successfully in the user's purchase cart ?" );
+    console.log(addedPurchaseItem !== undefined);
+  }
+  console.log("");
+}
+
 async function startTesting() {
   // await registerTesting();
   // await loginTesting();
   // await addItemTesting();
   // await deleteItemTesting();
   // await setStatusTesting();
+  // await addPurchaseTesting();
   }
 
 startTesting();

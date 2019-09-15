@@ -13,7 +13,7 @@ import { SERVER } from 'src/app/Shared/enums';
 })
 export class AdminPageComponent implements OnInit {
   columnDefs;
-  rowData;
+  rowData= [];
   gridApi: GridApi;
   textualSearch = "";
   displayLodaer = false;
@@ -61,12 +61,12 @@ export class AdminPageComponent implements OnInit {
     this.displayLodaer = true;
     if (this.textualSearch){
       this.backendCommunicatorService.getSpecificUser(this.textualSearch).subscribe(data => {
-        this.rowData = [data];
+        this.rowData = data as Array<any>;
         this.displayLodaer = false;   
       });
     } else {
       this.backendCommunicatorService.getAllUsers().subscribe(data => { 
-        this.rowData = data;
+        this.rowData = data as Array<any>;
         this.displayLodaer = false;
       });
     }

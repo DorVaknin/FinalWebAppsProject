@@ -80,9 +80,9 @@ deleteUser = (req, res) => {
     Buyer.findOne({ ID: userName })
       .then(user => {
         if (user === null) {
-          return res.status(404).send("User does not exists in the database");
+          return res.status(200).send([]);
         } else {
-          return res.status(200).send(user);
+          return res.status(200).send([user]);
         }
       })
       .catch(() => {

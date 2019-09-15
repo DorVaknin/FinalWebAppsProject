@@ -7,6 +7,7 @@ import { HomePageComponent } from './Home/components/home-page/home-page.compone
 import { AuthGuardService } from './Shared/Services/guards/auth-guard.service';
 import { AboutPageComponent } from './About/about-page/about-page.component';
 import { AdminGuardService } from './Shared/Services/guards/admin-guard.service';
+import { ContactPageComponent } from './contact/contact-page/contact-page.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'home', canActivate: [AuthGuardService] ,component: HomePageComponent},
   {path: 'about', component: AboutPageComponent},
+  {path: 'contact', component: ContactPageComponent},
   {path: 'cart', canActivate: [AuthGuardService], loadChildren: () => import('./Cart/cart.module').then(m => m.CartModule)},
   {path: 'checkout', canActivate: [AuthGuardService], loadChildren: () => import('./Checkout/checkout.module').then(m => m.CheckoutModule)},
   {path: 'admin', canActivate: [AdminGuardService], loadChildren: () => import('./Admin-screen/admin-module.module').then(m => m.AdminModuleModule)},

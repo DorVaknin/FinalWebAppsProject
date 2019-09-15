@@ -21,4 +21,8 @@ export class NavigationComponent implements OnInit {
     return window.localStorage.getItem('loggedIn') === 'true';
   }
 
+  get isAdmin() {
+    return window.localStorage.getItem('admin') === 'true';
+  }
+
 }

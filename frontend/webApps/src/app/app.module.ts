@@ -10,11 +10,13 @@ import { AuthModule } from './Auth/auth.module';
 import { HomeModule } from './Home/components/home.module';
 import { SharedModule } from './Shared/shared.module';
 import { AboutPageComponent } from './About/about-page/about-page.component';
+import { ContactPageComponent } from './contact/contact-page/contact-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutPageComponent,
+    ContactPageComponent,
   ],
   imports: [
     BrowserModule,

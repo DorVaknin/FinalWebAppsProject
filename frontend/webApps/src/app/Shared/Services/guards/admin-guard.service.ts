@@ -10,7 +10,7 @@ export class AdminGuardService {
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const isAdmin = this.authService.isAdmin;
+    const isAdmin = window.localStorage.getItem('admin') === 'true';
     if (isAdmin){
       return true;
     } else {

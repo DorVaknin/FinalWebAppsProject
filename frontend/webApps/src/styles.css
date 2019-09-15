@@ -23,6 +23,11 @@ h1,h2,h3,h4,h5,h6{
   justify-content: center;
 }
 
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
 .biscuit-alert {
   color: rgb(231, 52, 52);
   font-weight: bold;

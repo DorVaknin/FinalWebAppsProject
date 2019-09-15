@@ -8,7 +8,6 @@ const METHODS = {
 };
 
 async function approachToServer(options) {
-  // console.log(options)
   result = await axios(options);
   return result
 }

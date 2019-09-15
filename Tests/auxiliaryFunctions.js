@@ -7,7 +7,7 @@ const Item = require("../backend/models/Item");
 
 isItemExists = itemObjectID =>
   Item.findOne({ _id: itemObjectID })
-    .then(item => {
+    .then(item => {//
       if (item == null) {//does not exists in database
         return false;
       } else {

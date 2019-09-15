@@ -23,7 +23,6 @@ isItemExists = itemObjectID => Item.findOne({ _id: itemObjectID });
 const addItem = (req, res) => {
   const userObjectID = req.cookies.authToken;
   const itemObjectID = req.params.item_id;
-
   isItemExists(itemObjectID)
     .then(item => {
       if (item == null) {

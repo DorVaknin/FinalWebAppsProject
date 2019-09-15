@@ -18,7 +18,7 @@ export class ThankYouComponent implements OnInit {
       this.message = 'Thank you for your Purchase !<br>You will be redirected to the home page';      
       setTimeout(() => {
         this.router.navigate(['/home']);
-        this.cartService.clearCart();
+        this.cartService.clearCart().subscribe();
       }, 2500);
     }, 5000);
   }

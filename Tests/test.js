@@ -260,12 +260,12 @@ async function addPurchaseTesting(){
 }
 
 async function startTesting() {
-  // await registerTesting();
-  // await loginTesting();
-  // await addItemTesting();
-  // await deleteItemTesting();
-  // await setStatusTesting();
-  // await addPurchaseTesting();
+  await registerTesting();
+  await loginTesting();
+  await addItemTesting();
+  await deleteItemTesting();
+  await setStatusTesting();
+  await addPurchaseTesting();
   }
 
 startTesting();

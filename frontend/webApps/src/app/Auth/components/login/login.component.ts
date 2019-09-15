@@ -21,14 +21,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.http.post(`${SERVER.URL}/setstatusbyid/login`, {}).subscribe();
-    this.logAdmin();
   }
 
   async onLogin() {
     this.displayErrorLoginMessage = false;
     this.displayLoader = true;
     await this.authService.logIn(this.name, this.password, this.rememberMe);
-    if (this.authService.isLoggedIn) {
+    if (window.localStorage.getItem('loggedIn') === 'true') {
       this.router.navigate(['/home']);
     } else {
       this.displayLoader = false;

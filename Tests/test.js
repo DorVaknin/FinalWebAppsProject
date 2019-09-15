@@ -242,11 +242,11 @@ async function setStatusTesting(){
 }
 
 async function startTesting() {
-  await registerTesting();
-  await loginTesting();
-  await addItemTesting();
-  await deleteItemTesting();
-  await setStatusTesting();
+  // await registerTesting();
+  // await loginTesting();
+  // await addItemTesting();
+  // await deleteItemTesting();
+  // await setStatusTesting();
   }
 
 startTesting();

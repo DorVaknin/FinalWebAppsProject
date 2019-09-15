@@ -52,7 +52,7 @@ router.post("/setstatusbyid/:status", generalLogic.setStatus);
 
 //logout
 router.get("/logout", (req,res) =>{
-    res.clearCookie("authToken").send("cookie deleted");
+    res.clearCookie("authToken").send({message: "cookie deleted"});
 })
 
 //redirecting all the other pages to our default page

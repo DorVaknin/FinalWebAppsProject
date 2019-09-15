@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GridApi } from 'ag-grid-community';
-import {get} from 'lodash';
+import { get, debounce } from 'lodash';
 
 import {BackendCommunicatorService} from "../../../Shared/Services/backend-communicator.service";
 import { HttpClient } from '@angular/common/http';
@@ -15,12 +15,15 @@ export class AdminPageComponent implements OnInit {
   columnDefs;
   rowData;
   gridApi: GridApi;
+  textualSearch = "";
+  displayLodaer = false;
+  onTextChangedDebounced = debounce(this.onTextChanged, 500);
 
   constructor(private backendCommunicatorService: BackendCommunicatorService, private http: HttpClient) { }
 
   ngOnInit() {
     this.http.post(`${SERVER.URL}/setstatusbyid/admin`, {}).subscribe();
-    this.backendCommunicatorService.getAllUsers().subscribe(data => this.rowData = data);
+    this.getData();
     this.columnDefs = [
       {
         headerName: 'User Name' ,
@@ -47,6 +50,26 @@ export class AdminPageComponent implements OnInit {
         valueGetter : (params) => get(params, 'data.Status') || 'Offline'
       }
     ];
+  }
+
+
+  onTextChanged() {
+    this.getData(); 
+  }
+
+  getData (){
+    this.displayLodaer = true;
+    if (this.textualSearch){
+      this.backendCommunicatorService.getSpecificUser(this.textualSearch).subscribe(data => {
+        this.rowData = [data];
+        this.displayLodaer = false;   
+      });
+    } else {
+      this.backendCommunicatorService.getAllUsers().subscribe(data => { 
+        this.rowData = data;
+        this.displayLodaer = false;
+      });
+    }
   }
 
   onGridReady(event){

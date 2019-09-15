@@ -50,6 +50,10 @@ router.post("/addpurchase/:item_id", storeLogic.addPurchase);
 //This route should be called by frontend in every activity change of the user.
 router.post("/setstatusbyid/:status", generalLogic.setStatus);
 
+//logout
+router.get("/logout", (req,res) =>{
+    res.clearCookie("authToken").send("cookie deleted");
+})
 
 //redirecting all the other pages to our default page
 router.get('*', function(req, res){

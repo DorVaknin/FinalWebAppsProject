@@ -46,10 +46,12 @@ export class ItemComponent implements ItemInterface, OnInit {
   }
 
   getAmountInCart() {
-    this.cartService.getUserCart().subscribe(cartItems => {
-      this.amountInCart = 0;
-      (cartItems as Array<ItemInterface>).forEach(item => this.amountInCart = item._id === this._id ? this.amountInCart + 1 : this.amountInCart);
-    });;
+    if (this.isInCart){
+      this.cartService.getUserCart().subscribe(cartItems => {
+        this.amountInCart = 0;
+        (cartItems as Array<ItemInterface>).forEach(item => this.amountInCart = item._id === this._id ? this.amountInCart + 1 : this.amountInCart);
+      });;
+    }
   }
 
 }

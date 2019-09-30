@@ -23,7 +23,6 @@ import { ContactPageComponent } from './contact/contact-page/contact-page.compon
     AppRoutingModule,
     HttpClientModule,
     AuthModule,
-    HomeModule,
     SharedModule,
     BrowserAnimationsModule
   ],

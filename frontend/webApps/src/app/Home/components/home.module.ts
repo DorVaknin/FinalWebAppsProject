@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SharedModule } from 'src/app/Shared/shared.module';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -11,8 +11,13 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
   imports: [
     CommonModule,
     SharedModule,
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    RouterModule.forChild([{
+      path: '',
+      component: HomePageComponent,
+      pathMatch: 'full'
+    }])
   ],
-  exports: [HomePageComponent]
+  exports: [HomePageComponent, RouterModule]
 })
 export class HomeModule { }
